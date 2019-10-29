@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { Input, Form } from '@rocketseat/unform';
+import { signInRequest } from '~/store/modules/auth/actions';
 import logo from '~/assets/logo.png';
 
 const schema = Yup.object().shape({
@@ -12,14 +14,21 @@ const schema = Yup.object().shape({
 });
 
 export default function SignIn() {
+  const dispatch = useDispatch();
+  const loading = useSelector(state => state.auth.loading);
+
+  function handleSubmit({ email, password }) {
+    dispatch(signInRequest(email, password));
+  }
+
   return (
     <>
       <img src={logo} alt="JustParty" width="200" />
-      <Form schema={schema}>
+      <Form schema={schema} onSubmit={handleSubmit}>
         <Input name="email" type="email" placeholder="Seu e-mail" />
         <Input name="password" type="password" placeholder="Sua senha" />
 
-        <button type="submit">Acessar</button>
+        <button type="submit">{loading ? `carregando...` : `Acessar`}</button>
         <Link to="/register">
           Ainda não possui uma conta? <span>Cadastre-se</span>
         </Link>

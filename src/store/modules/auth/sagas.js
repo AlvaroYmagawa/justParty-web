@@ -18,6 +18,8 @@ export function* signIn({ payload }) {
 
     api.defaults.headers.Authorization = `Bearer ${token}`; // The Bearer token for all api requests
 
+    console.tron.log(response.data);
+
     yield put(signInSuccess(token, user));
 
     history.push('/dashboard');

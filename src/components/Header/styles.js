@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import colors from '~/styles/colors';
 
 export const Container = styled.div`
-  background: #222;
+  background: #191717;
   padding: 0 30px;
 `;
 
@@ -31,37 +31,18 @@ export const Content = styled.div`
   }
 
   aside {
+    width: 30%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
   }
 `;
 
 export const Profile = styled.div`
-  display: flex;
-  margin-left: 20px;
-  padding-left: 20px;
-  border-left: 1px solid #eee;
-
-  div {
-    text-align: right;
-    margin-right: 10px;
-
-    strong {
-      display: block;
-      color: #333;
-    }
-
-    a {
-      display: block;
-      margin-top: 2px;
-      font-size: 12px;
-      color: #999;
-    }
-  }
-
-  img {
-    height: 32px;
-    width: 32px;
-    border-radius: 50%;
-  }
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  background: url(${props => props.src}) center;
+  background-size: cover;
+  border-radius: 50%;
 `;

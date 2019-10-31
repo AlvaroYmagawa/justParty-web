@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { signOut } from '~/store/modules/auth/actions';
 
@@ -22,7 +24,9 @@ export default function ManageAccount({ visible }) {
             <p>{profile.name}</p>
             {profile.email}
           </span>
-          <button type="button">Gerenciar Conta</button>
+          <Link to="/profile">
+            <button type="button">Gerenciar Conta</button>
+          </Link>
         </div>
       </section>
       <Exit>
@@ -33,3 +37,11 @@ export default function ManageAccount({ visible }) {
     </Container>
   );
 }
+
+ManageAccount.propTypes = {
+  visible: PropTypes.bool,
+};
+
+ManageAccount.defaultProps = {
+  visible: false,
+};

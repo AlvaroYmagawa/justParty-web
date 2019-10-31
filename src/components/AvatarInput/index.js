@@ -27,13 +27,15 @@ export default function AvatarInput() {
     setFile(id);
     setPreview(url);
 
-    dispatch(updateProfileRequest(response.data));
+    dispatch(updateProfileRequest(response.data.id));
   }
 
   return (
     <Container>
       <label htmlFor="avatar">
-        <Avatar src={preview} size={110} />
+        <Avatar src={preview} size={110}>
+          <span>Editar</span>
+        </Avatar>
 
         <input
           type="file"

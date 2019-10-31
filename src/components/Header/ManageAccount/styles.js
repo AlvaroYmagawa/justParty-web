@@ -1,13 +1,14 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { darken } from 'polished';
 import { Link } from 'react-router-dom';
+import colors from '~/styles/colors';
 
 export const Container = styled.div`
   position: absolute;
   background: #fff;
   display: ${props => (props.visible ? 'flex' : 'none')};
   flex-direction: column;
-  width: 350px;
+  width: 320px;
   right: 0%;
   margin: 145px 40px 0 0;
   border: 1px solid #ccc;
@@ -38,14 +39,14 @@ export const Container = styled.div`
         border-radius: 4px;
         padding: 7px 10px;
         color: white;
-        background: #ba55d3;
-        border: 1px solid ${darken(0.2, '#ba55d3')};
+        background: ${colors.primary};
+        border: 1px solid ${darken(0.2, colors.primary)};
         width: 140px;
         font-weight: bold;
         font-size: 13px;
 
         &:hover {
-          background: ${darken(0.2, '#ba55d3')};
+          background: ${darken(0.2, colors.primary)};
         }
       }
     }

@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import colors from '~/styles/colors';
 
 export const Avatar = styled.div`
   cursor: pointer;
@@ -11,8 +12,12 @@ export const Avatar = styled.div`
   ${props =>
     props.editing &&
     css`
-      border: 2px solid #eeeeee88;
+      border: 2px solid ${colors.primary};
     `}
+
+  span {
+    color: black;
+  }
 `;
 
 export default Avatar;

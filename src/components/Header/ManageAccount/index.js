@@ -1,14 +1,22 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { signOut } from '~/store/modules/auth/actions';
+
 import { Container, Exit } from './styles';
+import AvatarInput from '~/components/AvatarInput';
 
 export default function ManageAccount({ visible }) {
   const profile = useSelector(state => state.user.profile);
+  const dispatch = useDispatch();
+
+  function handleSignOut() {
+    dispatch(signOut());
+  }
 
   return (
     <Container visible={visible}>
       <section>
-        <img src={profile.file.url} alt="test" width="40" />
+        <AvatarInput src={profile.file.url} name="avatar_id" />
         <div>
           <span>
             <p>{profile.name}</p>
@@ -17,8 +25,8 @@ export default function ManageAccount({ visible }) {
           <button type="button">Gerenciar Conta</button>
         </div>
       </section>
-      <Exit to="/login">
-        <button type="button" className="exit">
+      <Exit>
+        <button type="button" className="exit" onClick={handleSignOut}>
           Sair
         </button>
       </Exit>

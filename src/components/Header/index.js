@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { FaSearch, FaCalendar } from 'react-icons/fa';
-import { Container, Content, Profile } from './styles';
+import { Container, Content } from './styles';
+import { Avatar } from '~/components/Avatar';
 import ManageAccount from './ManageAccount';
 import logo from '~/assets/logo.png';
 
@@ -30,7 +31,12 @@ export default function Header() {
         <aside>
           <FaCalendar color="#eee" size={17} />
           <FaSearch color="#eee" />
-          <Profile src={profile.file.url} size={17} onClick={handleEditing} />
+          <Avatar
+            src={profile.file.url}
+            size={35}
+            onClick={handleEditing}
+            editing={editing}
+          />
         </aside>
 
         <ManageAccount visible={editing} />

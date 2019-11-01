@@ -22,18 +22,26 @@ export default function AvatarInput() {
 
     const response = await api.post('files', data);
 
-    const { id, url } = response.data;
+    const avatar = {
+      id: response.data.id,
+      url: response.data.url,
+    };
 
-    setFile(id);
-    setPreview(url);
+    setFile(avatar.id);
+    setPreview(avatar.url);
 
-    dispatch(updateProfileRequest(response.data));
+    dispatch(updateProfileRequest(avatar));
   }
 
   return (
     <Container>
       <label htmlFor="avatar">
-        <Avatar src={preview} size={110}>
+        <Avatar
+          src={
+            preview || 'https://api.adorable.io/avatars/110/abott@adorable.png'
+          }
+          size={110}
+        >
           <span>Editar</span>
         </Avatar>
 

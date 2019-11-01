@@ -7,10 +7,12 @@ import logo from '~/assets/logo.png';
 import { signUpRequest } from '~/store/modules/auth/actions';
 
 const schema = Yup.object().shape({
+  name: Yup.string().required('O nome é obrigatório'),
   email: Yup.string()
     .email('Insira um e-mail válido')
     .required('O e-mail é obrigatório'),
   password: Yup.string().required('A senha é obrigatória'),
+  confirmPassword: Yup.string().required('Confirme sua senha'),
 });
 
 export default function SignUp() {
@@ -24,7 +26,7 @@ export default function SignUp() {
     <>
       <img src={logo} alt="JustParty" width="200" />
       <Form schema={schema} onSubmit={handleSubmit}>
-        <Input name="name" type="name" placeholder="Nome completo" />
+        <Input name="name" type="text" placeholder="Nome completo" />
         <Input name="email" type="email" placeholder="Seu e-mail" />
         <Input name="password" type="password" placeholder="Sua senha" />
         <Input

@@ -18,8 +18,6 @@ export function* signIn({ payload }) {
 
     api.defaults.headers.Authorization = `Bearer ${token}`; // The Bearer token for all api requests
 
-    console.tron.log(response.data);
-
     yield put(signInSuccess(token, user));
 
     history.push('/dashboard');
@@ -40,6 +38,8 @@ export function* signUp({ payload }) {
       confirmPassword,
       promoter: false,
     });
+
+    toast.success(`Parabéns ${name}, agora você pode curtir o role!`);
 
     history.push('/');
   } catch (err) {

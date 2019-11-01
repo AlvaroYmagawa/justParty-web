@@ -18,7 +18,14 @@ export default function ManageAccount({ visible }) {
   return (
     <Container visible={visible}>
       <section>
-        <AvatarInput src={profile.file.url} name="avatar_id" />
+        <AvatarInput
+          src={
+            profile.file === null
+              ? 'https://api.adorable.io/avatars/110/abott@adorable.png'
+              : profile.file.url
+          }
+          name="avatar_id"
+        />
         <div>
           <span>
             <p>{profile.name}</p>

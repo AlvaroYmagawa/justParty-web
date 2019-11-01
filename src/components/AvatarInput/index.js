@@ -27,7 +27,7 @@ export default function AvatarInput() {
     setFile(id);
     setPreview(url);
 
-    dispatch(updateProfileRequest(response.data.id));
+    dispatch(updateProfileRequest(response.data));
   }
 
   return (

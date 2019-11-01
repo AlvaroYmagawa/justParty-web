@@ -16,8 +16,8 @@ const schema = Yup.object().shape({
 export default function SignUp() {
   const dispatch = useDispatch();
 
-  function handleSubmit({ name, email, password }) {
-    dispatch(signUpRequest(name, email, password));
+  function handleSubmit({ name, email, password, confirmPassword }) {
+    dispatch(signUpRequest(name, email, password, confirmPassword));
   }
 
   return (
@@ -28,7 +28,7 @@ export default function SignUp() {
         <Input name="email" type="email" placeholder="Seu e-mail" />
         <Input name="password" type="password" placeholder="Sua senha" />
         <Input
-          name="password"
+          name="confirmPassword"
           type="password"
           placeholder="Confirme sua senha"
         />

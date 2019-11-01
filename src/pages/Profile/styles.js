@@ -1,10 +1,14 @@
 import styled from 'styled-components';
-import colors from '~/styles/colors';
 import { darken } from 'polished';
+import colors from '~/styles/colors';
 
 export const Container = styled.div`
   max-width: 600px;
   margin: 50px auto;
+
+  svg {
+    font-color: ${colors.primary};
+  }
 
   > button {
     width: 100%;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Form, Input } from '@rocketseat/unform';
+import { MdChevronLeft } from 'react-icons/md';
 import Header from '~/components/Header';
 import { updateProfileRequest } from '~/store/modules/user/actions';
 
@@ -18,6 +19,7 @@ export default function Profil() {
     <>
       <Header tittle="GERENCIAR CONTA" />
       <Container>
+        <MdChevronLeft size={25} />
         <Form initialData={profile} onSubmit={handleSubmit}>
           <Input name="name" placeholder="Nome completo" />
           <Input

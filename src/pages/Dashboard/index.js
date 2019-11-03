@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
+import pt from 'date-fns/locale/pt';
+import { MdShoppingCart } from 'react-icons/md';
 import api from '~/services/api';
 
-import { Container, Event, Description } from './styles';
 import Header from '~/components/Header';
+import Image from '~/components/Banner';
+
+import { Container, EventList, Description } from './styles';
 
 export default function Dashboard() {
   const [events, setEvents] = useState([]);
@@ -12,7 +16,21 @@ export default function Dashboard() {
   useEffect(() => {
     async function loadEvents() {
       const response = await api.get('events');
-      setEvents(response.data);
+
+      const data = response.data.map(event => ({
+        ...event,
+        day: format(parseISO(event.date), 'dd', {
+          locale: pt,
+        }),
+        mounth: format(parseISO(event.date), 'MMMM', {
+          locale: pt,
+        }),
+        hours: format(parseISO(event.date), 'HH:mm', {
+          locale: pt,
+        }),
+      }));
+
+      setEvents(data);
     }
 
     loadEvents();
@@ -22,25 +40,42 @@ export default function Dashboard() {
     <>
       <Header tittle="DASHBOARD" />
       <Container>
-        <ul>
-          {events.map(event => (
-            <Event key={event.id}>
-              <img src={event.banner.url} alt={event.name} />
-              <Description>
-                <div>{event.date}</div>
+        <h1>Eventos</h1>
+        <EventList>
+          {events.map(
+            event =>
+              !event.past && (
+                <li key={event.id}>
+                  <Link to={`/events/${event.id}`}>
+                    <Image src={event.banner.url} />
+                  </Link>
+                  <Description>
+                    <section>
+                      <div className="date">
+                        <h3>{event.mounth}</h3>
+                        <h2>{event.day}</h2>
+                      </div>
+                      <tr />
+                      <div className="description">
+                        <h3>{event.name}</h3>
+                        <span>
+                          Organizado por
+                          <Link to={`/users/${event.promoter.id}`}>
+                            {event.promoter.name}
+                          </Link>
+                        </span>
+                      </div>
+                    </section>
 
-                <div>
-                  <h3>{event.name}</h3>
-                  <span>
-                    Organizado por <Link to="/">{event.promoter.name}</Link>
-                  </span>
-                </div>
-
-                <button type="button">Comprar</button>
-              </Description>
-            </Event>
-          ))}
-        </ul>
+                    <button type="button">
+                      <MdShoppingCart size={15} color="#fff" />
+                      R$: 25,00
+                    </button>
+                  </Description>
+                </li>
+              )
+          )}
+        </EventList>
       </Container>
     </>
   );

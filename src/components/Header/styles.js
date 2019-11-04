@@ -13,6 +13,10 @@ export const Content = styled.div`
   justify-content: space-between;
   align-items: center;
 
+  h3 {
+    text-transform: uppercase;
+  }
+
   nav {
     display: flex;
     align-items: center;

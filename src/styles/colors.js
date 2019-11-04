@@ -1,7 +1,7 @@
 const colors = {
-  primary: '#fb6f91',
-  accent: '#3b9eff',
-  darkPrimary: '#fb6f91',
+  primary: '#ea80c8',
+  accent: '#9911c947',
+  darkPrimary: '#ca2094',
 };
 
 export default colors;

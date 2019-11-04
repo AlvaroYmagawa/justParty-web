@@ -28,7 +28,7 @@ export default function Header({ tittle }) {
           <Link to="/dashboard">
             <img src={logo} alt="JustParty" width="190" />
           </Link>
-          {tittle}
+          <h3>{tittle}</h3>
         </nav>
 
         <aside>

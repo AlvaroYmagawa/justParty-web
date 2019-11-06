@@ -47,7 +47,7 @@ export default function Dashboard() {
               !event.past && (
                 <li key={event.id}>
                   <Link to={`/events/${event.id}`}>
-                    <Image src={event.banner.url} />
+                    <Image src={event.banner.url} size={300} />
                   </Link>
                   <Description>
                     <section>

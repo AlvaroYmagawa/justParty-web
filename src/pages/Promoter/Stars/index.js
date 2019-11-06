@@ -59,8 +59,8 @@ export default function Stars({ array }) {
         star === 0 ? (
           <MdStar size={25} color="#777" />
         ) : (
-          <MdStarHalf size={25} color="#777" />
-        )
+            <MdStarHalf size={25} color="#777" />
+          )
       )}
     </Container>
   );

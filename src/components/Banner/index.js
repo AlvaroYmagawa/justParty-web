@@ -6,7 +6,7 @@ export const Banner = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   border-radius: 12px 12px 0 0;
-  height: 300px;
+  height: ${props => props.size}px;
   width: 100%;
 `;
 

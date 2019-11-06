@@ -9,7 +9,7 @@ export const Container = styled.div`
     background: #fff;
     display: flex;
     flex-direction: column;
-    padding: 16px;
+    padding: 24px;
     border: 1px solid #ddd;
 
     h1 {
@@ -20,6 +20,18 @@ export const Container = styled.div`
       color: #888;
       font-size: 1rem;
     }
+
+    ul {
+      li {
+        margin-top: 24px;
+        display: flex;
+        align-items: center;
+
+        svg {
+          margin-right: 8px;
+        }
+      }
+    }
   }
 `;
 
@@ -27,16 +39,14 @@ export const Tittle = styled.div`
   display: flex;
   width: 100%;
   padding: 16px 0;
-  align-items: center;
+  align-items: flex-start;
   border-bottom: 1px solid #ddd;
 
   .date {
     display: flex;
     align-items: center;
+    margin-right: 32px;
     flex-direction: column;
-    padding-right: 12px;
-    margin-right: 12px;
-    border-right: 1px solid #ddd;
 
     h3 {
       color: red;

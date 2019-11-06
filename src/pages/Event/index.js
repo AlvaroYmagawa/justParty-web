@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
-import { MdEmail, MdPhone, MdRoom, MdStar } from 'react-icons/md';
+import { MdRoom, MdTimer } from 'react-icons/md';
 import api from '~/services/api';
 
 import { Container, Tittle } from './styles';
 import Header from '~/components/Header';
+import Loading from '~/components/Loading';
 import Image from '~/components/Banner';
 
 export default function Event() {
@@ -40,7 +41,9 @@ export default function Event() {
   return (
     <>
       <Header tittle={event.name} />
-      {!loading && (
+      {loading ? (
+        <Loading />
+      ) : (
         <Container>
           <Image src={event.banner.url} size={400} />
           <section>
@@ -55,7 +58,16 @@ export default function Event() {
               </div>
             </Tittle>
 
-            <main>ppp</main>
+            <ul>
+              <li>
+                <MdTimer color="#777" size={20} />
+                <p>{`${event.day} de ${event.mounth} às ${event.hours}`}</p>
+              </li>
+              <li>
+                <MdRoom color="#777" size={20} />
+                {event.localization}
+              </li>
+            </ul>
           </section>
         </Container>
       )}

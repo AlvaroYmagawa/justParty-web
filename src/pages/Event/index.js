@@ -49,6 +49,7 @@ export default function Event() {
 
     loadEvent();
   }, [eventId]);
+
   return (
     <>
       <Header tittle={event.name} />

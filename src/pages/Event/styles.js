@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { darken } from 'polished';
+import colors from '~/styles/colors';
 
 export const Container = styled.div`
   padding: 32px 16px;
@@ -9,7 +11,7 @@ export const Container = styled.div`
     background: #fff;
     display: flex;
     flex-direction: column;
-    padding: 24px;
+    padding: 24px 56px;
     border: 1px solid #ddd;
 
     h1 {
@@ -21,11 +23,14 @@ export const Container = styled.div`
       font-size: 1rem;
     }
 
-    ul {
+    .details {
       li {
-        margin-top: 24px;
         display: flex;
         align-items: center;
+
+        & + li {
+          margin-top: 16px;
+        }
 
         svg {
           margin-right: 8px;
@@ -33,14 +38,110 @@ export const Container = styled.div`
       }
     }
   }
+
+  .button {
+    width: 100%;
+    margin: 16px auto;
+    text-align: center;
+
+    button {
+      border: none;
+      width: 100%;
+      background: ${colors.primary};
+      border-radius: 8px;
+      padding: 8px;
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 20px;
+      font-weight: bold;
+
+      &:hover {
+        background: ${darken(0.3, colors.primary)};
+        transition: background 0.3s;
+      }
+
+      svg {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  /* .buttons {
+    display: flex;
+    justify-content: center;
+    max-width: 300px;
+    margin: 16px auto;
+
+    button {
+      border: none;
+      background: none;
+
+      &:hover {
+        opacity: 0.7;
+        transition: opacity 0.3s;
+      }
+    }
+  } */
 `;
 
 export const Tittle = styled.div`
   display: flex;
   width: 100%;
-  padding: 16px 0;
+  padding: 0 0 16px 0;
   align-items: flex-start;
   border-bottom: 1px solid #ddd;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  button {
+    border: none;
+    background: #777;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 12px;
+    width: 100%;
+    max-width: 180px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &:hover {
+      background: ${colors.primary};
+    }
+
+    p {
+      font-size: 14px;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    @media (max-width: 800px) {
+      background: none;
+      padding: 0;
+      justify-content: center;
+
+      &:hover {
+        svg {
+          fill: ${colors.primary};
+        }
+      }
+
+      svg {
+        fill: #777;
+        width: 40px;
+        height: 40px;
+      }
+
+      p {
+        display: none;
+      }
+    }
+  }
+
+  > div {
+    display: flex;
+    align-items: flex-end;
+  }
 
   .date {
     display: flex;
@@ -59,6 +160,46 @@ export const Tittle = styled.div`
       margin-top: 8px;
       font-weight: normal;
       font-size: 2rem;
+    }
+  }
+`;
+
+export const Description = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+`;
+
+export const Promoter = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  h3 {
+    color: #888;
+  }
+
+  div {
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+
+    h4 {
+      font-size: 18px;
+      color: #222;
+    }
+
+    > div {
+      margin-left: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+
+      .stars {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
   }
 `;

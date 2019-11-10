@@ -6,10 +6,6 @@ export const Container = styled.div`
   max-width: 600px;
   margin: 50px auto;
 
-  svg {
-    font-color: ${colors.primary};
-  }
-
   > button {
     width: 100%;
     margin: 10px 0 0;
@@ -33,12 +29,12 @@ export const Container = styled.div`
     margin-top: 30px;
 
     input {
-      background-color: rgba(0, 0, 0, 0.1);
+      background-color: #ffffff33;
       border: none;
       border-radius: 4px;
       height: 44px;
       padding: 0 15px;
-      color: #222;
+      color: #333;
       box-shadow: 1px 1px 4px #00000055;
       margin: 0 0 10px;
     }
@@ -53,7 +49,7 @@ export const Container = styled.div`
     hr {
       border: 0;
       height: 1px;
-      background: #00000055;
+      background: #ffffff99;
       margin: 10px 0 20px;
     }
 

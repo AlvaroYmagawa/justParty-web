@@ -7,6 +7,7 @@ export const Container = styled.div`
 
   h1 {
     text-transform: none;
+    color: #333;
   }
 `;
 
@@ -23,6 +24,7 @@ export const EventList = styled.ul`
   }
 
   li {
+    background: #fff;
     margin-top: 16px;
     border-radius: 12px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
@@ -44,6 +46,7 @@ export const Description = styled.div`
     color: #fff;
     border-radius: 4px;
     padding: 8px;
+    font-weight: bold;
 
     svg {
       margin-right: 8px;
@@ -100,6 +103,10 @@ export const Description = styled.div`
       max-width: 300px;
       font-size: 14px;
       color: #777;
+
+      a {
+        margin-left: 5px;
+      }
     }
   }
 `;

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { darken } from 'polished';
 import colors from '~/styles/colors';
 
@@ -65,78 +65,15 @@ export const Container = styled.div`
       }
     }
   }
-
-  /* .buttons {
-    display: flex;
-    justify-content: center;
-    max-width: 300px;
-    margin: 16px auto;
-
-    button {
-      border: none;
-      background: none;
-
-      &:hover {
-        opacity: 0.7;
-        transition: opacity 0.3s;
-      }
-    }
-  } */
 `;
 
 export const Tittle = styled.div`
   display: flex;
   width: 100%;
   padding: 0 0 16px 0;
-  align-items: flex-start;
   border-bottom: 1px solid #ddd;
   align-items: flex-end;
   justify-content: space-between;
-
-  button {
-    border: none;
-    background: #777;
-    color: #fff;
-    border-radius: 8px;
-    padding: 10px 12px;
-    width: 100%;
-    max-width: 180px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    &:hover {
-      background: ${colors.primary};
-    }
-
-    p {
-      font-size: 14px;
-      text-transform: uppercase;
-      font-weight: bold;
-    }
-
-    @media (max-width: 800px) {
-      background: none;
-      padding: 0;
-      justify-content: center;
-
-      &:hover {
-        svg {
-          fill: ${colors.primary};
-        }
-      }
-
-      svg {
-        fill: #777;
-        width: 40px;
-        height: 40px;
-      }
-
-      p {
-        display: none;
-      }
-    }
-  }
 
   > div {
     display: flex;
@@ -160,6 +97,58 @@ export const Tittle = styled.div`
       margin-top: 8px;
       font-weight: normal;
       font-size: 2rem;
+    }
+  }
+`;
+
+export const FavoriteButton = styled.button`
+  border: none;
+  background: #777;
+  color: #fff;
+  border-radius: 8px;
+  padding: 10px 12px;
+  width: 100%;
+  max-width: 180px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  ${props =>
+    props.favorite &&
+    css`
+      background: ${colors.primary};
+      justify-content: center;
+
+      p {
+        display: none;
+      }
+    `}
+
+  p {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  @media (max-width: 900px) {
+    background: none;
+    padding: 0;
+    justify-content: center;
+
+    &:hover {
+      svg {
+        fill: ${colors.primary};
+      }
+    }
+
+    svg {
+      fill: #777;
+      width: 40px;
+      height: 40px;
+    }
+
+    p {
+      display: none;
     }
   }
 `;
@@ -197,8 +186,8 @@ export const Promoter = styled.div`
 
       .stars {
         display: flex;
-        align-items: center;
-        justify-content: center;
+        align-items: flex-start;
+        justify-content: flex-start;
       }
     }
   }

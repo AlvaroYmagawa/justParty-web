@@ -10,7 +10,7 @@ export const Container = styled.div`
   flex-direction: column;
   width: 320px;
   right: 0%;
-  margin: 145px 40px 0 0;
+  margin: 145px 8% 0 0;
   border: 1px solid #ccc;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
 

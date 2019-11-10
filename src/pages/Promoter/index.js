@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Input } from '@rocketseat/unform';
 import { MdEmail, MdPhone, MdRoom, MdStar } from 'react-icons/md';
-import * as Yup from 'yup';
 import api from '~/services/api';
 
 import Header from '~/components/Header';
@@ -40,7 +39,7 @@ export default function Promoter() {
   async function updateCommentary(data) {
     const { comment, note } = data;
 
-    const response = await api.put(`evaluations/${userId}`, {
+    await api.put(`evaluations/${userId}`, {
       comment,
       note,
     });

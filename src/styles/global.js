@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 
 export default createGlobalStyle`
- @import url('https://fonts.googleapis.com/css?family=Roboto:100,400&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,400,700');
 
   *{
     margin: 0;

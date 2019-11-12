@@ -1,8 +1,20 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const animation = keyframes`
+  0%{background-position: 0% 50%}
+  50%{background-position: 100% 50%}
+  100%{background-position: 0% 50%}
+`;
 
 export const Container = styled.div`
+  position: fixed;
+  left: 0%;
+  height: 100%;
+  animation: ${animation} 4s ease-in infinite;
+  background-size: 400% 400%;
+  width: 200px;
   background: linear-gradient(#7159c1, #ab59c1);
-  box-shadow: 2px 2px 8px #00000077;
+  box-shadow: 4px 4px 8px #00000077;
 `;
 
 export const Content = styled.div`

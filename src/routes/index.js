@@ -9,6 +9,7 @@ import Dashboard from '../pages/Dashboard';
 import Profile from '../pages/Profile';
 import Promoter from '../pages/Promoter';
 import Event from '../pages/Event';
+import NewEvent from '../pages/NewEvent';
 
 export default function Routes() {
   return (
@@ -20,6 +21,7 @@ export default function Routes() {
       <Route path="/profile" component={Profile} isPrivate />
       <Route path="/users/:userId" component={Promoter} isPrivate />
       <Route path="/events/:eventId" component={Event} isPrivate />
+      <Route path="/developers/events/new" component={NewEvent} isPrivate />
 
       <Route path="/" component={() => <h1>404</h1>} />
     </Switch>

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { signOut } from '~/store/modules/auth/actions';
 import { Container, Content } from './styles';
 import { Avatar } from '~/components/Avatar';
 import ManageAccount from '../ManageAccount';
 import logo from '~/assets/logo.png';
 
 export default function Header() {
+  const dispatch = useDispatch();
   const profile = useSelector(state => state.user.profile);
   const [editing, setEditing] = useState(false);
 
@@ -16,6 +18,10 @@ export default function Header() {
     } else {
       setEditing(true);
     }
+  }
+
+  function handleSignOut() {
+    dispatch(signOut());
   }
 
   return (
@@ -54,7 +60,9 @@ export default function Header() {
           </ul>
         </aside>
 
-        <button type="button">Sair</button>
+        <button type="button" onClick={handleSignOut}>
+          Sair
+        </button>
         <ManageAccount visible={editing} />
       </Content>
     </Container>

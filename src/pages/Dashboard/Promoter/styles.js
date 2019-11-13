@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import colors from '~/styles/colors';
 
 export const Container = styled.div`
   display: flex;
@@ -16,24 +15,6 @@ export const Container = styled.div`
     justify-content: space-between;
     width: 100%;
     font-weight: 100;
-
-    a {
-      display: flex;
-      align-items: center;
-      border-radius: 4px;
-      padding: 8px 14px;
-      background: ${colors.primary};
-      justify-content: space-between;
-
-      &:hover {
-        opacity: 0.7;
-        transition: opacity 0.3s;
-      }
-
-      h3 {
-        color: #fff;
-      }
-    }
   }
 `;
 

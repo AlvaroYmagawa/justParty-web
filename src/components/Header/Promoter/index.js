@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { signOut } from '~/store/modules/auth/actions';
 import { Container, Content } from './styles';
-import { Avatar } from '~/components/Avatar';
+import Avatar from '~/components/AvatarInput';
 import ManageAccount from '../ManageAccount';
 import logo from '~/assets/logo.png';
 
@@ -34,7 +34,7 @@ export default function Header() {
           DEVELOPERS
         </nav>
 
-        <div>
+        <div className="profile">
           <Avatar
             src={
               profile.file === null

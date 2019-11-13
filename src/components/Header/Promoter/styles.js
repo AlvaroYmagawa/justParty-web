@@ -25,6 +25,10 @@ export const Content = styled.div`
   height: 100%;
   padding: 40px 0;
 
+  .profile {
+    text-align: center;
+  }
+
   nav {
     display: flex;
     flex-direction: column;

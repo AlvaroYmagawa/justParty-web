@@ -6,6 +6,7 @@ import pt from 'date-fns/locale/pt';
 import api from '~/services/api';
 import Image from '~/components/Banner';
 import { Container, EventList, Status } from './styles';
+import { DefaultButton } from '~/components/Buttons';
 
 export default function Promoter() {
   const profile = useSelector(state => state.user.profile);
@@ -42,7 +43,7 @@ export default function Promoter() {
         <header>
           <h1>Meus Eventos</h1>
           <Link to="/developers/events/new">
-            <h3>Criar evento</h3>
+            <DefaultButton>Crair evento</DefaultButton>
           </Link>
         </header>
 

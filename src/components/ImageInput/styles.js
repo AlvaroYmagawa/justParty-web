@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  height: 200px;
+  height: 180px;
   width: 100%;
-  max-width: 400px;
+  max-width: 250px;
+  border: 1px solid #aaa;
 
   label {
+    height: 100%;
     display: flex;
     cursor: pointer;
 
@@ -16,7 +18,7 @@ export const Container = styled.div`
 `;
 
 export const Image = styled.div`
-  height: 200px;
+  height: 100%;
   width: 100%;
   background: url(${props => props.src}) center no-repeat;
   background-size: cover;

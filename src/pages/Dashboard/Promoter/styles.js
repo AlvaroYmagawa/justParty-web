@@ -6,15 +6,18 @@ export const Container = styled.div`
   flex-direction: column;
   padding: 30px;
 
-  h1 {
-    font-weight: 400;
-  }
-
   header {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    align-items: center;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #ccc;
     font-weight: 100;
+
+    h1 {
+      font-weight: 400;
+    }
   }
 `;
 

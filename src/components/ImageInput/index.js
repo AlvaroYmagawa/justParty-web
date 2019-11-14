@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import api from '~/services/api';
+import strings from '~/strings';
 
 import { Container, Image } from './styles';
 
@@ -31,7 +32,8 @@ export default function ImageInput({ alt }) {
       <label htmlFor={alt}>
         <Image
           src={
-            preview || 'https://api.adorable.io/avatars/110/abott@adorable.png'
+            preview ||
+            `${strings.baseUrl}/files/3b9f630b1dbac971329cb33e2482517c.png`
           }
         />
 

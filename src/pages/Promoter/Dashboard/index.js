@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { format, parseISO } from 'date-fns';
-import { Link } from 'react-router-dom';
 import pt from 'date-fns/locale/pt';
 import api from '~/services/api';
 import Image from '~/components/Banner';
 import { Container, EventList, Status } from './styles';
-import { DefaultButton } from '~/components/Buttons';
 
-export default function Promoter() {
+export default function Dashboard() {
   const profile = useSelector(state => state.user.profile);
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -40,13 +38,6 @@ export default function Promoter() {
   return (
     !loading && (
       <Container>
-        <header>
-          <h1>Meus Eventos</h1>
-          <Link to="/developers/events/new">
-            <DefaultButton>Crair evento</DefaultButton>
-          </Link>
-        </header>
-
         <EventList>
           {events.map(event => (
             <li key={event.id}>

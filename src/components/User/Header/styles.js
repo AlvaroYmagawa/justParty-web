@@ -1,16 +1,12 @@
-import styled, { keyframes } from 'styled-components';
-
-const animation = keyframes`
-  0%{background-position: 0% 50%}
-  50%{background-position: 100% 50%}
-  100%{background-position: 0% 50%}
-`;
+import styled from 'styled-components';
+import colors from '~/styles/colors';
 
 export const Container = styled.div`
-  background: linear-gradient(-90deg, #ab59c1, #7159c1);
-  animation: ${animation} 5s ease-in infinite;
-  background-size: 400% 400%;
-  box-shadow: 2px 2px 8px #00000077;
+  position: fixed;
+  width: 100%;
+  top: 0%;
+  background: #fff;
+  border-bottom: 1px solid ${colors.border};
   padding: 0 8%;
 `;
 
@@ -30,12 +26,12 @@ export const Content = styled.div`
     display: flex;
     align-items: center;
     font-weight: bold;
-    color: #fff;
+    color: ${colors.text};
 
     img {
       margin-right: 20px;
       padding-right: 20px;
-      border-right: 1px solid #ffffff33;
+      border-right: 1px solid ${colors.text};
     }
   }
 
@@ -45,10 +41,14 @@ export const Content = styled.div`
     align-items: center;
     justify-content: space-between;
 
+    svg {
+      fill: ${colors.text};
+    }
+
     div {
       display: flex;
       align-items: center;
-      color: #fff;
+      color: ${colors.text};
 
       .profile {
         display: flex;
@@ -57,8 +57,8 @@ export const Content = styled.div`
         margin-right: 16px;
 
         span {
-          color: #ffffff88;
-          font-size: 12px;
+          font-size: 13px;
+          color: ${colors.span};
         }
       }
     }

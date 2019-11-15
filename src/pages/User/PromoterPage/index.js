@@ -6,7 +6,7 @@ import { Input } from '@rocketseat/unform';
 import { MdEmail, MdPhone, MdRoom, MdStar } from 'react-icons/md';
 import api from '~/services/api';
 
-import Header from '~/components/Header';
+import Header from '~/components/User/Header';
 import Image from '~/components/Avatar';
 import Loading from '~/components/Loading';
 import Stars from './Stars';

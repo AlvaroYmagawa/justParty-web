@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { FaSearch, FaCalendar } from 'react-icons/fa';
 import { Container, Content } from './styles';
 import { Avatar } from '~/components/Avatar';
-import ManageAccount from '../ManageAccount';
+import ManageAccount from './ManageAccount';
 import logo from '~/assets/logo.png';
 
 export default function Header({ tittle }) {
@@ -32,11 +32,11 @@ export default function Header({ tittle }) {
         </nav>
 
         <aside>
-          <FaCalendar color="#eee" size={17} />
-          <FaSearch color="#eee" />
+          <FaCalendar size={17} />
+          <FaSearch size={17} />
           <div>
             <div className="profile">
-              <p>{profile.name}</p>
+              <h4>{profile.name}</h4>
               <span>{profile.email}</span>
             </div>
 

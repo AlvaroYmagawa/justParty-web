@@ -6,6 +6,7 @@ import { signOut } from '~/store/modules/auth/actions';
 
 import { Container, Exit } from './styles';
 import AvatarInput from '~/components/AvatarInput';
+import { DefaultButton } from '~/components/Buttons';
 
 export default function ManageAccount({ visible }) {
   const profile = useSelector(state => state.user.profile);
@@ -32,7 +33,7 @@ export default function ManageAccount({ visible }) {
             {profile.email}
           </span>
           <Link to="/profile">
-            <button type="button">Gerenciar Conta</button>
+            <DefaultButton type="button">Gerenciar Conta</DefaultButton>
           </Link>
         </div>
       </section>

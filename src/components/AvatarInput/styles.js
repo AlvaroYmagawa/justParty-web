@@ -12,12 +12,11 @@ export const Container = styled.div`
     }
 
     div {
-      display: flex;
-      justify-content: flex-end;
-      align-items: flex-end;
+      padding-top: 50%;
+
       span {
         width: 100%;
-        height: 50%;
+        height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;

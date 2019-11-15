@@ -13,7 +13,7 @@ import {
   Description,
   Promoter,
 } from './styles';
-import Header from '~/components/Header';
+import Header from '~/components/User/Header';
 import Loading from '~/components/Loading';
 import BannerImage from '~/components/Banner';
 import PromoterImage from '~/components/Avatar';

@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { darken } from 'polished';
 import colors from '~/styles/colors';
 
 export const Container = styled.div`
-  padding: 40px 8%;
+  width: 100%;
+  padding: 40px 9%;
 
   h1 {
     text-transform: none;
@@ -22,12 +22,37 @@ export const EventList = styled.ul`
   a {
     text-decoration: none;
   }
+`;
 
-  li {
-    background: #fff;
-    margin-top: 16px;
-    border-radius: 12px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+export const Event = styled.li`
+  background: #fff;
+  margin-top: 16px;
+  border-radius: 4px;
+  border: 1px solid ${colors.border};
+
+  .eventHeader {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+
+    .promoterImage {
+      margin-right: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 48px;
+      width: 48px;
+      background: linear-gradient(
+        90deg,
+        ${colors.primary},
+        ${colors.darkPrimary}
+      );
+      border-radius: 50%;
+    }
+
+    div {
+      border: 2px solid #fff;
+    }
   }
 `;
 
@@ -36,26 +61,6 @@ export const Description = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-
-  button {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: none;
-    background: ${colors.primary};
-    color: #fff;
-    border-radius: 4px;
-    padding: 8px;
-    font-weight: bold;
-
-    svg {
-      margin-right: 8px;
-    }
-
-    &:hover {
-      background: ${darken(0.2, colors.primary)};
-    }
-  }
 
   section {
     display: flex;
@@ -75,7 +80,7 @@ export const Description = styled.div`
     border-right: 1px solid #bbb;
 
     h3 {
-      color: red;
+      color: ${colors.darkPrimary};
       font-weight: normal;
       text-transform: uppercase;
       font-size: 0.9rem;

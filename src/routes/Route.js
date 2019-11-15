@@ -13,12 +13,16 @@ export default function RouteWrapper({
   ...rest
 }) {
   const { signed } = store.getState().auth;
+  const { profile } = store.getState().user;
 
   if (!signed && isPrivate) {
     return <Redirect to="/" />;
   }
 
   if (signed && !isPrivate) {
+    if (profile.promoter) {
+      return <Redirect to="/developers" />;
+    }
     return <Redirect to="/dashboard" />;
   }
 

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 import { MdChevronLeft } from 'react-icons/md';
-import Header from '~/components/Header';
+import Header from '~/components/User/Header';
 import { updateProfileRequest } from '~/store/modules/user/actions';
 import colors from '~/styles/colors';
 

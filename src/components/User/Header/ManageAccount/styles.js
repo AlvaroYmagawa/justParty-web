@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-import { darken } from 'polished';
 import { Link } from 'react-router-dom';
-import colors from '~/styles/colors';
 
 export const Container = styled.div`
   position: absolute;
@@ -33,21 +31,6 @@ export const Container = styled.div`
 
       span {
         color: #888;
-      }
-
-      button {
-        border-radius: 4px;
-        padding: 7px 10px;
-        color: white;
-        background: ${colors.primary};
-        border: 1px solid ${darken(0.2, colors.primary)};
-        width: 140px;
-        font-weight: bold;
-        font-size: 13px;
-
-        &:hover {
-          background: ${darken(0.2, colors.primary)};
-        }
       }
     }
   }

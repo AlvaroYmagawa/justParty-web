@@ -104,7 +104,6 @@ export const Tittle = styled.div`
 export const FavoriteButton = styled.button`
   border: none;
   background: #777;
-  color: #fff;
   border-radius: 8px;
   padding: 10px 12px;
   width: 100%;
@@ -125,6 +124,7 @@ export const FavoriteButton = styled.button`
     `}
 
   p {
+    color: #fff;
     font-size: 14px;
     text-transform: uppercase;
     font-weight: bold;

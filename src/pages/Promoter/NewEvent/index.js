@@ -10,7 +10,7 @@ import { Container, InputArea } from './styles';
 
 export default function NewEvent() {
   async function handleSubmit(data) {
-    const response = await api.post('/events', {
+    await api.post('/events', {
       name: data.name,
       localization: data.localization,
       description: data.description,

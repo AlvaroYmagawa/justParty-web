@@ -8,6 +8,5 @@ export const Wrapper = styled.div`
       props.isPromoter &&
       css`
         display: flex;
-        padding-left: 250px;
       `};
 `;

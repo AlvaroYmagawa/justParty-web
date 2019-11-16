@@ -1,12 +1,19 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import colors from '~/styles/colors';
 
 export const Container = styled.div`
   position: fixed;
   width: calc(100% - 250px);
+  left: ${props => (props.asideMenu ? '250' : '0')}px;
   top: 0%;
   padding: 0 24px;
-  background: linear-gradient(-90deg, ${colors.darkPrimary}, ${colors.primary});
+  background: ${colors.primary};
+
+  ${props =>
+    !props.asideMenu &&
+    css`
+      width: 100%;
+    `}
 
   .tittle {
     display: flex;

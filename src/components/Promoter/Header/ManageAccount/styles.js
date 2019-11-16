@@ -2,11 +2,12 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
-  position: absolute;
+  position: fixed;
   background: #fff;
   display: ${props => (props.visible ? 'flex' : 'none')};
   flex-direction: column;
   width: 320px;
+  right: 1%;
   margin: 145px 8% 0 0;
   border: 1px solid #ccc;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
@@ -25,7 +26,7 @@ export const Container = styled.div`
       p {
         font-weight: bold;
         margin-bottom: 5px;
-        color: #000;
+        color: #333;
       }
 
       span {

@@ -10,7 +10,8 @@ import Profile from '../pages/User/Profile';
 import PromoterPage from '../pages/User/PromoterPage';
 import Event from '../pages/User/EventPage';
 
-import PromoterDashboard from '../pages/Promoter/Dashboard';
+import PromoterDashboard from '../pages/Promoter/MyEvents';
+// import MyEvents from '../pages/Promoter/MyEvents';
 import NewEvent from '../pages/Promoter/NewEvent';
 
 export default function Routes() {
@@ -25,6 +26,7 @@ export default function Routes() {
       <Route path="/events/:eventId" component={Event} isPrivate />
 
       <Route path="/developers" component={PromoterDashboard} isPrivate />
+      {/* <Route path="/developers/event" exact component={MyEvents} isPrivate /> */}
       <Route path="/developers/events/new" component={NewEvent} isPrivate />
 
       <Route path="/" component={() => <h1>404</h1>} />

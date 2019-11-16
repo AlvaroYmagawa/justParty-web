@@ -1,5 +1,23 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import colors from '~/styles/colors';
+
+export const Block = styled.div`
+  display: ${props => (props.enable ? 'flex' : 'none')};
+  width: 308px;
+  height: 100%;
+  position: relative;
+  left: 0%;
+`;
+
+const startAnimation = keyframes`
+  to{
+    top: 0%;
+  }
+
+  from{
+   top: 100%;
+  }
+`;
 
 export const Container = styled.div`
   display: ${props => (props.enable ? 'flex' : 'none')};
@@ -12,6 +30,7 @@ export const Container = styled.div`
   height: 100%;
   padding: 24px 0;
   width: 250px;
+  animation: linear ${startAnimation} 0.3s;
 
   header {
     border-bottom: 1px solid ${colors.border};

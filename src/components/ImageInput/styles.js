@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  height: 180px;
+  height: 260px;
   width: 100%;
-  max-width: 250px;
+  max-width: 500px;
   border: 1px solid #aaa;
 
   label {

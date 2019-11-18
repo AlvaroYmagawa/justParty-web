@@ -17,13 +17,15 @@ export default function AsideMenu({ enable }) {
       <Block enable={enable} />
       <Container enable={enable}>
         <header>
-          <img src={logo} alt="JustParty" width="140" />
-          <h4>DEVELOPERS</h4>
+          <Link to="/developers/events">
+            <img src={logo} alt="JustParty" width="170" />
+            <h4>DEVELOPERS</h4>
+          </Link>
         </header>
 
         <ul>
           <li>
-            <Link>
+            <Link to="/developers/events">
               <MdEvent />
               Meus eventos
             </Link>

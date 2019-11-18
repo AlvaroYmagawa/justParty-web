@@ -21,7 +21,7 @@ export function* signIn({ payload }) {
     yield put(signInSuccess(token, user));
 
     if (user.promoter) {
-      history.push('/developers');
+      history.push('/developers/events');
     } else {
       history.push('/dashboard');
     }

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import InputMask from 'react-input-mask';
 
 import { Form, Input } from '@rocketseat/unform';
-import { MdClose } from 'react-icons/md';
+import Header from '~/components/Promoter/Header';
 import api from '~/services/api';
 import { DefaultButton } from '~/components/Buttons';
 import Banner from '~/components/ImageInput';
@@ -10,56 +10,106 @@ import { Container, InputArea } from './styles';
 
 export default function NewEvent() {
   async function handleSubmit(data) {
+    const dateHours = document.getElementById('dateHours');
+    const salesDateHours = document.getElementById('salesDateHours');
+
+    console.tron.log(data.banner);
+
     await api.post('/events', {
       name: data.name,
       localization: data.localization,
       description: data.description,
-      date: '2019-12-31T18:00:00-03:00',
-      sales_date: '2019-12-31T18:00:00-03:00',
+      date: `${data.date}T${dateHours.value}-3:00`,
+      sales_date: `${data.salesDate}T${salesDateHours.value}-3:00`,
       banner_id: 4,
     });
   }
 
   return (
     <>
+      <Header tittle="Novo Evento" />
       <Container>
-        <header>
-          <h1>Criar um evento</h1>
-          <Link to="/dashboard">
-            <MdClose size={28} color="#555" />
-          </Link>
-        </header>
-
         <Form onSubmit={handleSubmit}>
           <InputArea>
-            Nome do evento
-            <Input type="text" name="name" />
+            <header>
+              <h3>Detalhes do evento</h3>
+              <p>
+                Os campos marcados com <span> * </span> devem ser preenchidos
+                antes de publicar.
+              </p>
+            </header>
+
+            <div className="content">
+              <p>
+                Nome <span>*</span>
+              </p>
+              <Input type="text" name="name" />
+            </div>
+
+            <div className="content">
+              <p>Descrição</p>
+              <Input type="text" name="description" />
+            </div>
+
+            <div className="content">
+              <p>
+                Localização <span>*</span>
+              </p>
+              <Input type="text" name="localization" />
+            </div>
           </InputArea>
 
           <InputArea>
-            Descrição do evento
-            <Input multiline name="description" />
+            <h3>Datas e horários</h3>
+
+            <div className="content">
+              <div>
+                <p>
+                  Data da festa <span>*</span>
+                </p>
+                <Input type="date" name="date" />
+              </div>
+
+              <div>
+                <p>
+                  Horário <span>*</span>
+                </p>
+                <InputMask mask="99:99" className="hours" id="dateHours" />
+              </div>
+            </div>
+
+            <div className="content">
+              <div>
+                <p>
+                  Data das vendas <span>*</span>
+                </p>
+                <Input type="date" name="salesData" />
+              </div>
+
+              <div>
+                <p>
+                  Horário <span>*</span>
+                </p>
+                <InputMask mask="99:99" className="hours" id="salesDateHours" />
+              </div>
+            </div>
           </InputArea>
 
           <InputArea>
-            Localização
-            <Input type="text" name="localization" />
-          </InputArea>
+            <h3>Personalização</h3>
 
-          <InputArea>
-            Data ínicio da festa
-            <Input type="date" name="date" />
-          </InputArea>
+            <div className="banner">
+              <p>
+                Banner do evento <span>*</span>
+              </p>
 
-          <InputArea>
-            Ínicio das vendas
-            <Input type="date" name="salesData" />
-          </InputArea>
+              <div className="bannerInfo">
+                Resolução da imagem
+                <span>500 x 260</span>
+              </div>
 
-          <InputArea>
-            <p>Banner do evento</p>
-            <span>Esse é o banner que será mostrado na página do evento.</span>
-            <Banner alt="Event Banner" />
+              <Banner alt="Banner do seu evento" name="banner" />
+            </div>
           </InputArea>
 
           <DefaultButton type="submit">Crair Evento</DefaultButton>

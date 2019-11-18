@@ -7,6 +7,14 @@ export const Container = styled.div`
   flex-direction: column;
   padding: 0 40px;
 
+  .controlllerArea {
+    margin-top: 24px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+  }
+
   header {
     display: flex;
     justify-content: space-between;
@@ -25,7 +33,7 @@ export const Container = styled.div`
 export const EventList = styled.ul`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  margin-top: 32px;
+  margin-top: 24px;
   grid-gap: 16px;
 
   li {
@@ -36,11 +44,15 @@ export const EventList = styled.ul`
     .description {
       display: flex;
       justify-content: space-between;
-      padding: 12px;
+      padding: 16px;
 
       div {
         & + div {
           align-self: flex-end;
+
+          svg {
+            fill: ${colors.span};
+          }
         }
       }
 
@@ -50,8 +62,7 @@ export const EventList = styled.ul`
       }
 
       span {
-        color: #777;
-        font-size: 14px;
+        color: ${colors.span};
       }
     }
   }
@@ -61,4 +72,5 @@ export const Status = styled.div`
   color: ${props => (props.past ? 'red' : 'green')};
   text-transform: uppercase;
   font-weight: bold;
+  margin: 16px;
 `;

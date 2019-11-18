@@ -6,7 +6,7 @@ export const DefaultButton = styled.button`
   border-radius: 4px;
   background: ${colors.accent};
   border: none;
-  padding: 8px 24px;
+  padding: 11px 24px;
   font-size: 14px;
   color: #fff;
   font-weight: bold;

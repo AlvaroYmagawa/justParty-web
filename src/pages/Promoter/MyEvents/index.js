@@ -80,7 +80,7 @@ export default function Dashboard() {
           <EventList>
             {events.map(event => (
               <li key={event.id}>
-                <Link>
+                <Link to={`/developers/events/${event.id}`}>
                   <Status type="Status" past={event.past}>
                     {event.past ? 'Encerrado' : 'Em aberto'}
                   </Status>

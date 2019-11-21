@@ -6,6 +6,7 @@ const colors = {
   text: '#333',
   span: '#999',
   border: '#ccc',
+  icons: '#707070',
 };
 
 export default colors;

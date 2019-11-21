@@ -1,17 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
+import { IoIosHeartEmpty } from 'react-icons/io';
 import { DefaultButton } from '~/components/Buttons';
 import api from '~/services/api';
+import { addWishRequest } from '~/store/modules/wishlist/actions';
 
 import Header from '~/components/User/Header';
 import PromoterImage from '~/components/Avatar';
 import BannerImage from '~/components/Banner';
 
-import { Container, EventList, Event, Description } from './styles';
+import {
+  Container,
+  EventList,
+  Event,
+  Description,
+  EventHeader,
+} from './styles';
 
 export default function Dashboard() {
+  const dispatch = useDispatch();
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
@@ -37,6 +47,10 @@ export default function Dashboard() {
     loadEvents();
   }, []);
 
+  function handleFavorite(eventId) {
+    dispatch(addWishRequest(eventId));
+  }
+
   return (
     <>
       <Header tittle="DASHBOARD" />
@@ -47,20 +61,28 @@ export default function Dashboard() {
             event =>
               !event.past && (
                 <Event key={event.id}>
-                  <div className="eventHeader">
-                    <Link to={`/users/${event.promoter.id}`}>
-                      <div className="promoterImage">
-                        <PromoterImage
-                          src={event.promoter.File.url}
-                          size={40}
-                        />
-                      </div>
-                    </Link>
+                  <EventHeader>
+                    <div>
+                      <Link to={`/users/${event.promoter.id}`}>
+                        <div className="promoterImage">
+                          <PromoterImage
+                            src={event.promoter.File.url}
+                            size={40}
+                          />
+                        </div>
+                      </Link>
+                      <Link to={`/users/${event.promoter.id}`}>
+                        <h4>{event.promoter.name}</h4>
+                      </Link>
+                    </div>
 
-                    <Link to={`/users/${event.promoter.id}`}>
-                      <h4>{event.promoter.name}</h4>
-                    </Link>
-                  </div>
+                    <button
+                      type="button"
+                      onClick={() => handleFavorite(event.id)}
+                    >
+                      <IoIosHeartEmpty ok />
+                    </button>
+                  </EventHeader>
                   <Link to={`/events/${event.id}`}>
                     <BannerImage src={event.banner.url} size={300} />
                   </Link>
@@ -77,7 +99,9 @@ export default function Dashboard() {
                       </div>
                     </section>
 
-                    <DefaultButton type="button">Comprar</DefaultButton>
+                    <div className="buttons">
+                      <DefaultButton type="button">Comprar</DefaultButton>
+                    </div>
                   </Description>
                 </Event>
               )

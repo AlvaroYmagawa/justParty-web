@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { FaSearch, FaCalendar } from 'react-icons/fa';
+import { FaCalendar } from 'react-icons/fa';
 import { Container, Content } from './styles';
 import { Avatar } from '~/components/Avatar';
 import ManageAccount from './ManageAccount';
+import FavoriteButton from './FavoriteButton';
 import logo from '~/assets/logo.png';
 
 export default function Header({ tittle }) {
@@ -32,8 +33,8 @@ export default function Header({ tittle }) {
         </nav>
 
         <aside>
-          <FaCalendar size={17} />
-          <FaSearch size={17} />
+          <FaCalendar />
+          <FavoriteButton />
           <div>
             <div className="profile">
               <h4>{profile.name}</h4>
@@ -54,8 +55,8 @@ export default function Header({ tittle }) {
         </aside>
 
         <ManageAccount visible={editing} />
-      </Content>
-    </Container>
+      </Content >
+    </Container >
   );
 }
 

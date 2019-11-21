@@ -5,6 +5,7 @@ export const Avatar = styled.div`
   cursor: pointer;
   height: ${props => props.size}px;
   width: ${props => props.size}px;
+  min-width: ${props => props.size}px;
   background: url(${props => props.src}) center;
   background-size: cover;
   border-radius: 50%;

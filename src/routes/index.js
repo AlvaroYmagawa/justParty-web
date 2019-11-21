@@ -12,6 +12,7 @@ import Event from '../pages/User/EventPage';
 
 import MyEvents from '../pages/Promoter/MyEvents';
 import NewEvent from '../pages/Promoter/NewEvent';
+import EventPage from '../pages/Promoter/EventPage';
 
 export default function Routes() {
   return (
@@ -34,6 +35,12 @@ export default function Routes() {
       <Route
         path="/developers/events/new"
         component={NewEvent}
+        isPrivate
+        onlyPromoters
+      />
+      <Route
+        path="/developers/events/:eventId"
+        component={EventPage}
         isPrivate
         onlyPromoters
       />

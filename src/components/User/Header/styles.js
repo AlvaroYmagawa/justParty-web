@@ -7,7 +7,7 @@ export const Container = styled.div`
   top: 0%;
   background: #fff;
   border-bottom: 1px solid ${colors.border};
-  padding: 0 8%;
+  padding: 0 7%;
 `;
 
 export const Content = styled.div`
@@ -42,7 +42,8 @@ export const Content = styled.div`
     justify-content: space-between;
 
     svg {
-      fill: ${colors.text};
+      height: 18px;
+      width: 20px;
     }
 
     div {

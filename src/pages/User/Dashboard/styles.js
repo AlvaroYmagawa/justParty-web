@@ -37,18 +37,6 @@ export const EventHeader = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  > button {
-    border: none;
-    background: none;
-
-    svg {
-      cursor: pointer;
-      height: 28px;
-      width: 28px;
-      fill: ${colors.text};
-    }
-  }
-
   div {
     display: flex;
     align-items: center;
@@ -71,6 +59,17 @@ export const EventHeader = styled.div`
 
   div {
     border: 2px solid #fff;
+  }
+`;
+
+export const FavoriteButton = styled.button`
+  border: none;
+  background: none;
+
+  svg {
+    cursor: pointer;
+    height: 28px;
+    width: 28px;
   }
 `;
 

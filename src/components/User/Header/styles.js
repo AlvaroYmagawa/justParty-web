@@ -22,7 +22,8 @@ export const Content = styled.div`
     text-transform: uppercase;
   }
 
-  nav {
+  > nav {
+    width: 100%;
     display: flex;
     align-items: center;
     font-weight: bold;
@@ -36,22 +37,22 @@ export const Content = styled.div`
   }
 
   aside {
-    width: 30%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
 
     svg {
-      height: 18px;
+      height: 20px;
       width: 20px;
     }
 
-    div {
+    .profile {
       display: flex;
       align-items: center;
       color: ${colors.text};
 
-      .profile {
+      .profileName {
         display: flex;
         align-items: flex-end;
         flex-direction: column;

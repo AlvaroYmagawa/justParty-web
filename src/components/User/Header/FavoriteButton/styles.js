@@ -72,6 +72,7 @@ export const Wish = styled.li`
 
       strong {
         color: ${colors.primary};
+        margin-right: 5px;
       }
     }
   }

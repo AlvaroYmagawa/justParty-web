@@ -3,14 +3,18 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
-import { IoIosHeartEmpty } from 'react-icons/io';
+import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io';
 import { DefaultButton } from '~/components/Buttons';
 import api from '~/services/api';
-import { addWishRequest } from '~/store/modules/wishlist/actions';
+import {
+  addWishRequest,
+  removeWishRequest,
+} from '~/store/modules/wishlist/actions';
 
 import Header from '~/components/User/Header';
 import PromoterImage from '~/components/Avatar';
 import BannerImage from '~/components/Banner';
+import colors from '~/styles/colors';
 
 import {
   Container,
@@ -18,6 +22,7 @@ import {
   Event,
   Description,
   EventHeader,
+  FavoriteButton,
 } from './styles';
 
 export default function Dashboard() {
@@ -26,10 +31,12 @@ export default function Dashboard() {
 
   useEffect(() => {
     async function loadEvents() {
+      const wishlist = await api.get('wishlists');
       const response = await api.get('events');
 
       const data = response.data.map(event => ({
         ...event,
+        favorited: wishlist.data.filter(wish => wish.event_id === event.id),
         day: format(parseISO(event.date), 'dd', {
           locale: pt,
         }),
@@ -46,10 +53,6 @@ export default function Dashboard() {
 
     loadEvents();
   }, []);
-
-  function handleFavorite(eventId) {
-    dispatch(addWishRequest(eventId));
-  }
 
   return (
     <>
@@ -76,12 +79,25 @@ export default function Dashboard() {
                       </Link>
                     </div>
 
-                    <button
-                      type="button"
-                      onClick={() => handleFavorite(event.id)}
-                    >
-                      <IoIosHeartEmpty ok />
-                    </button>
+                    {event.favorited.length === 0 ? (
+                      <FavoriteButton
+                        type="button"
+                        onClick={() => {
+                          dispatch(addWishRequest(event.id));
+                        }}
+                      >
+                        <IoIosHeartEmpty color={colors.text} />
+                      </FavoriteButton>
+                    ) : (
+                      <FavoriteButton
+                        type="button"
+                        onClick={() => {
+                          dispatch(removeWishRequest(event.id));
+                        }}
+                      >
+                        <IoIosHeart color={colors.primary} />
+                      </FavoriteButton>
+                    )}
                   </EventHeader>
                   <Link to={`/events/${event.id}`}>
                     <BannerImage src={event.banner.url} size={300} />

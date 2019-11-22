@@ -5,9 +5,22 @@ export function addWishRequest(eventId) {
   };
 }
 
-export function addWishSuccess(event) {
+export function loadWishlistRequest() {
   return {
-    type: '@wishlist/ADD_WISH_SUCCESS',
-    payload: { event },
+    type: '@wishlist/LOAD_WISHLIST_REQUEST',
+  };
+}
+
+export function removeWishRequest(wishId) {
+  return {
+    type: '@wishlist/REMOVE_WISH_REQUEST',
+    payload: { wishId },
+  };
+}
+
+export function updateWishlist(wishes) {
+  return {
+    type: '@wishlist/UPDATE_WISHLIST',
+    payload: { wishes },
   };
 }

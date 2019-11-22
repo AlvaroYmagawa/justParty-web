@@ -1,44 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FaHeart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { parseISO, formatDistance } from 'date-fns';
 import pt from 'date-fns/locale/pt';
-import api from '~/services/api';
+import { loadWishlistRequest } from '~/store/modules/wishlist/actions';
 
 import RoundImage from '~/components/Avatar';
 import { Container, WishList, Wish, Scroll, Badge } from './styles';
 import colors from '~/styles/colors';
 
 export default function FavoriteButton() {
-  const [wishList, setWishList] = useState([]);
+  const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
+  const wishlist = useSelector(state => state.wishlist.wishlist);
 
-  useEffect(() => {
-    async function loadWishList() {
-      const response = await api.get('/wishlists');
-
-      const data = response.data.map(wish => ({
-        ...wish,
-        timeDistance: formatDistance(
-          parseISO(wish.Event.sales_date),
-          new Date(),
-          {
-            addSuffix: true,
-            locale: pt,
-          }
-        ),
-      }));
-
-      setWishList(data);
-    }
-
-    loadWishList();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  function handleVisibility() {
+  async function handleVisibility() {
+    await dispatch(loadWishlistRequest());
     setVisible(!visible);
-    console.tron.log(wishList);
   }
 
   return (
@@ -48,7 +27,7 @@ export default function FavoriteButton() {
       </Badge>
 
       <WishList visible={visible}>
-        {wishList.map(wish => (
+        {wishlist.map(wish => (
           <Scroll>
             <Link to={`/events/${wish.Event.id}`}>
               <Wish key={wish.id} unread={!wish.read}>
@@ -60,8 +39,17 @@ export default function FavoriteButton() {
                 <div className="wishInfo">
                   <h4>{wish.Event.name}</h4>
                   <span>
-                    As vendas começam
-                    <strong> {wish.timeDistance}</strong>
+                    <strong>
+                      {formatDistance(
+                        parseISO(wish.Event.sales_date),
+                        new Date(),
+                        {
+                          // addSuffix: true,
+                          locale: pt,
+                        }
+                      )}
+                    </strong>
+                    para o ínicio das vendas
                   </span>
                 </div>
               </Wish>

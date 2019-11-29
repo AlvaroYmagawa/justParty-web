@@ -9,6 +9,7 @@ import { Avatar } from '~/components/Avatar';
 import ManageAccount from './ManageAccount';
 import FavoriteButton from './FavoriteButton';
 import logo from '~/assets/logo.png';
+import Cart from './Cart';
 
 export default function Header({ tittle }) {
   const profile = useSelector(state => state.user.profile);
@@ -33,8 +34,9 @@ export default function Header({ tittle }) {
         </nav>
 
         <aside>
-          <Calendar />
+          {/* <Calendar /> */}
           <FavoriteButton />
+          <Cart />
           <div className="profile">
             <div className="profileName">
               <h4>{profile.name}</h4>

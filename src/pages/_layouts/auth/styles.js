@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { darken } from 'polished';
+import colors from '~/styles/colors';
 
 export const Wrapper = styled.div`
   height: 100%;
@@ -19,44 +19,38 @@ export const Content = styled.div`
     margin-top: 30px;
 
     input {
-      background-color: rgba(0, 0, 0, 0.1);
-      border: none;
+      margin-bottom: 16px;
       border-radius: 4px;
-      height: 44px;
-      padding: 0 15px;
-      color: #fff;
-      margin: 0 0 10px;
+      border: 1px solid ${colors.border};
+
+      padding: 8px;
 
       &::placeholder {
-        color: rgba(255, 255, 255, 0.7);
+        color: ${colors.span};
       }
     }
 
-    span {
-      color: #fb6f91;
-      align-self: flex-start;
-      margin: 0 0 10px;
-      font-weight: bold;
-    }
+    .checkbox {
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      background: none;
+      border: none;
+      color: ${colors.span};
 
-    button {
-      margin: 5px 0 0;
-      height: 44px;
-      background: #3b9eff;
       font-weight: bold;
-      color: #fff;
-      border: 0;
-      border-radius: 4px;
-      font-size: 16px;
-      transition: background 0.2s;
 
-      &:hover {
-        background: ${darken(0.03, '#3b9eff')};
+      div {
+        margin-right: 8px;
+        width: 17px;
+        height: 17px;
+        border-radius: 4px;
+        border: 1px solid ${colors.border};
       }
     }
 
     a {
-      color: #fff;
+      color: ${colors.darkPrimary};
       margin-top: 15px;
       font-size: 16px;
       opacity: 0.8;

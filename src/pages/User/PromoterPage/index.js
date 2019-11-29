@@ -22,6 +22,7 @@ export default function Promoter() {
   const [promoter, setPromoter] = useState({});
   const [evaluations, setEvaluations] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingEvaluation, setLoadingEvaluation] = useState(false);
 
   useEffect(() => {
     async function loadPromoter() {
@@ -39,38 +40,45 @@ export default function Promoter() {
   async function updateCommentary(data) {
     const { comment, note } = data;
 
-    await api.put(`evaluations/${userId}`, {
+    const response = await api.put(`evaluations/${userId}`, {
       comment,
       note,
     });
+
+    setEvaluations([...evaluations, response.data]);
+    setLoading(false);
   }
 
   async function handleSubmit(data) {
     const { comment, note } = data;
+    setLoadingEvaluation(true);
 
     if (note === '') {
       return;
     }
 
-    await api
-      .post(`evaluations/${userId}`, {
-        comment,
-        note,
-      })
-      .catch(error => {
-        switch (error.response.data.error) {
-          case 'You already done your evaluation for this promoter':
-            updateCommentary(data);
-            break;
-        }
-      });
+    await api.post(`evaluations/${userId}`, {
+      comment,
+      note,
+    });
+    // .catch(error => {
+    //   switch (error.response.data.error) {
+    //     case 'You already done your evaluation for this promoter':
+    //       updateCommentary(data);
+    //       break;
+    //   }
+    // });
+
+    const response = await api.get(`evaluations/${userId}`);
+
+    setEvaluations(response.data);
+
+    setLoadingEvaluation(false);
   }
 
   return (
     <>
-      {loading ? (
-        <Loading loading={loading} />
-      ) : (
+      {!loading && (
         <>
           <Header tittle={promoter.name} />
           <Container>
@@ -101,17 +109,20 @@ export default function Promoter() {
 
             <CommentList>
               <h3>Avaliações</h3>
-              {evaluations.map(evaluation => (
-                <li key={evaluation.id}>
-                  <Image src={evaluation.user.File.url} size={32} />
-                  <p>
-                    <span>{evaluation.user.name}</span>
-                    {evaluation.comment}
-                  </p>
-                  <MdStar color="#999" size={17} />
-                  {evaluation.note}
-                </li>
-              ))}
+              {evaluations.map(
+                evaluation =>
+                  !loadingEvaluation && (
+                    <li key={evaluation.id}>
+                      <Image src={evaluation.user.File.url} size={32} />
+                      <p>
+                        <span>{evaluation.user.name}</span>
+                        {evaluation.comment}
+                      </p>
+                      <MdStar color="#999" size={17} />
+                      {evaluation.note}
+                    </li>
+                  )
+              )}
               <Commentary onSubmit={handleSubmit}>
                 <Image src={profile.file.url} size={32} />
                 <Input

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { Input, Form } from '@rocketseat/unform';
+import { DefaultButton } from '~/components/Buttons';
 import { signInRequest } from '~/store/modules/auth/actions';
 import logo from '~/assets/logo.png';
 
@@ -28,7 +29,9 @@ export default function SignIn() {
         <Input name="email" type="email" placeholder="Seu e-mail" />
         <Input name="password" type="password" placeholder="Sua senha" />
 
-        <button type="submit">{loading ? `carregando...` : `Acessar`}</button>
+        <DefaultButton type="submit">
+          {loading ? `carregando...` : `Acessar`}
+        </DefaultButton>
         <Link to="/register">
           Ainda não possui uma conta? <span>Cadastre-se</span>
         </Link>

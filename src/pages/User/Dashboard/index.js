@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io';
+import { addToCart } from '~/store/modules/cart/actions';
 import { DefaultButton } from '~/components/Buttons';
 import api from '~/services/api';
 import {
@@ -13,6 +14,7 @@ import {
 
 import Header from '~/components/User/Header';
 import PromoterImage from '~/components/Avatar';
+import { Categories } from '~/components/Events';
 import BannerImage from '~/components/Banner';
 import colors from '~/styles/colors';
 
@@ -53,6 +55,10 @@ export default function Dashboard() {
 
     loadEvents();
   }, []);
+
+  function addProduct(product) {
+    dispatch(addToCart(product));
+  }
 
   return (
     <>
@@ -111,12 +117,18 @@ export default function Dashboard() {
                       <tr />
                       <div className="description">
                         <h2>{event.name}</h2>
-                        <span>{event.description}</span>
+                        {/* <span>{event.description}</span> */}
+                        <Categories eventId={event.id} />
                       </div>
                     </section>
 
                     <div className="buttons">
-                      <DefaultButton type="button">Comprar</DefaultButton>
+                      <DefaultButton
+                        type="button"
+                        onClick={() => addProduct(event)}
+                      >
+                        Comprar
+                      </DefaultButton>
                     </div>
                   </Description>
                 </Event>

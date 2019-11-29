@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
+
 import { Input, Form } from '@rocketseat/unform';
+import { DefaultButton } from '~/components/Buttons';
 import logo from '~/assets/logo.png';
+import { Checkbox } from '~/components/Inputs';
 import { signUpRequest } from '~/store/modules/auth/actions';
 
 const schema = Yup.object().shape({
@@ -16,26 +19,68 @@ const schema = Yup.object().shape({
 });
 
 export default function SignUp() {
+  const [isPromoter, setIsPromoter] = useState(false);
   const dispatch = useDispatch();
 
-  function handleSubmit({ name, email, password, confirmPassword }) {
-    dispatch(signUpRequest(name, email, password, confirmPassword));
+  function handleSubmit({
+    name,
+    email,
+    password,
+    confirmPassword,
+    description,
+    adress,
+  }) {
+    dispatch(
+      signUpRequest(
+        name,
+        email,
+        password,
+        confirmPassword,
+        description,
+        adress,
+        isPromoter
+      )
+    );
+  }
+
+  function handleIsPromoter() {
+    setIsPromoter(!isPromoter);
   }
 
   return (
     <>
       <img src={logo} alt="JustParty" width="200" />
+
       <Form schema={schema} onSubmit={handleSubmit}>
         <Input name="name" type="text" placeholder="Nome completo" />
+
         <Input name="email" type="email" placeholder="Seu e-mail" />
+
         <Input name="password" type="password" placeholder="Sua senha" />
+
         <Input
           name="confirmPassword"
           type="password"
           placeholder="Confirme sua senha"
         />
 
-        <button type="submit">Cadastre-se</button>
+        {isPromoter && (
+          <>
+            <Input name="description" type="text" placeholder="Descrição" />
+
+            <Input name="adress" type="text" placeholder="Endereço" />
+
+            <Input name="contact" type="text" placeholder="Telefone" />
+          </>
+        )}
+
+        <DefaultButton type="submit">Cadastre-se</DefaultButton>
+
+        <button type="button" className="checkbox" onClick={handleIsPromoter}>
+          <div />
+          Quero ser um promotor!
+        </button>
+
         <Link to="/">Já possuí uma conta, hora da festa!</Link>
       </Form>
     </>

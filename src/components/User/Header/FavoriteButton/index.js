@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaHeart } from 'react-icons/fa';
+import { FaRegHeart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { parseISO, formatDistance } from 'date-fns';
@@ -23,7 +23,7 @@ export default function FavoriteButton() {
   return (
     <Container>
       <Badge type="button" onClick={handleVisibility} visible={visible}>
-        <FaHeart color={visible ? colors.accent : colors.text} />
+        <FaRegHeart color={visible ? colors.accent : colors.text} />
       </Badge>
 
       <WishList visible={visible}>

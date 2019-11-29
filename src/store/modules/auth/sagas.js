@@ -33,14 +33,24 @@ export function* signIn({ payload }) {
 
 export function* signUp({ payload }) {
   try {
-    const { name, email, password, confirmPassword } = payload;
+    const {
+      name,
+      email,
+      password,
+      confirmPassword,
+      description,
+      adress,
+      promoter,
+    } = payload;
 
     yield call(api.post, 'users', {
       name,
       email,
       password,
       confirmPassword,
-      promoter: false,
+      description,
+      adress,
+      promoter,
     });
 
     toast.success(`Parabéns ${name}, agora você pode curtir o role!`);

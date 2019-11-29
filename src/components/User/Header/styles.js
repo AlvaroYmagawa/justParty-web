@@ -8,6 +8,11 @@ export const Container = styled.div`
   background: #fff;
   border-bottom: 1px solid ${colors.border};
   padding: 0 7%;
+
+  svg {
+    height: 20px;
+    width: 20px;
+  }
 `;
 
 export const Content = styled.div`
@@ -37,15 +42,10 @@ export const Content = styled.div`
   }
 
   aside {
-    width: 100%;
+    width: 50%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    svg {
-      height: 20px;
-      width: 20px;
-    }
 
     .profile {
       display: flex;

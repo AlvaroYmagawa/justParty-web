@@ -17,6 +17,4 @@ export const DefaultButton = styled.button`
   }
 `;
 
-export const Test = styled.button``;
-
-export default [DefaultButton, Test];
+export default DefaultButton;

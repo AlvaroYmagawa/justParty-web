@@ -12,8 +12,8 @@ export default function Calendar() {
 
   return (
     <Container>
-      <Badge onClick={handleVisibility}>
-        <FaCalendar visible={visible} />
+      <Badge onClick={handleVisibility} visible={visible}>
+        <FaCalendar />
       </Badge>
       <MyCalendar visible={visible} />
     </Container>

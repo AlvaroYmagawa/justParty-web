@@ -8,6 +8,7 @@ export const Wrapper = styled.div`
   align-items: center;
   border: 1px solid ${colors.border};
   padding: 8px 16px;
+  background: #eee;
 
   input {
     border: none;
@@ -19,7 +20,13 @@ export const Wrapper = styled.div`
   }
 
   svg {
+    height: 17px;
+    width: 17px;
     fill: ${colors.span};
     margin-right: 8px;
+  }
+
+  button {
+    display: none;
   }
 `;

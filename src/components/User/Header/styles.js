@@ -8,6 +8,7 @@ export const Container = styled.div`
   background: #fff;
   border-bottom: 1px solid ${colors.border};
   padding: 0 7%;
+  z-index: 20;
 
   svg {
     height: 20px;

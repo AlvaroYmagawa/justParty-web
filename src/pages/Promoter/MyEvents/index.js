@@ -12,7 +12,7 @@ import Image from '~/components/Banner';
 import Header from '~/components/Promoter/Header';
 import { Container, EventList, Status } from './styles';
 import { DefaultButton } from '~/components/Buttons';
-import Filter from '~/components/Inputs/Filter';
+import { Filter } from '~/components/Filters';
 
 export default function Dashboard() {
   const profile = useSelector(state => state.user.profile);

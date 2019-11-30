@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
-import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io';
+import { IoIosHeartEmpty, IoIosHeart, IoMdMusicalNote } from 'react-icons/all';
+import { Input, Form } from '@rocketseat/unform';
 import { addToCart } from '~/store/modules/cart/actions';
 import { DefaultButton } from '~/components/Buttons';
 import api from '~/services/api';
@@ -16,6 +17,7 @@ import Header from '~/components/User/Header';
 import PromoterImage from '~/components/Avatar';
 import { Categories } from '~/components/Events';
 import BannerImage from '~/components/Banner';
+import { Filter, FilterByCategory } from '~/components/Filters';
 import colors from '~/styles/colors';
 
 import {
@@ -30,6 +32,29 @@ import {
 export default function Dashboard() {
   const dispatch = useDispatch();
   const [events, setEvents] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [visible, setVisible] = useState(false);
+
+  function handleVisibility() {
+    setVisible(!visible);
+  }
+
+  function formatDate(array) {
+    const data = array.map(event => ({
+      ...event,
+      day: format(parseISO(event.date), 'dd', {
+        locale: pt,
+      }),
+      mounth: format(parseISO(event.date), 'MMMM', {
+        locale: pt,
+      }),
+      hours: format(parseISO(event.date), 'HH:mm', {
+        locale: pt,
+      }),
+    }));
+
+    return data;
+  }
 
   useEffect(() => {
     async function loadEvents() {
@@ -53,6 +78,13 @@ export default function Dashboard() {
       setEvents(data);
     }
 
+    async function loadCategories() {
+      const response = await api.get('/defaultCategories');
+
+      setCategories(response.data);
+    }
+
+    loadCategories();
     loadEvents();
   }, []);
 
@@ -60,32 +92,104 @@ export default function Dashboard() {
     dispatch(addToCart(product));
   }
 
+  async function loadAllEvents() {
+    const response = await api.get('events');
+    setEvents(formatDate(response.data));
+  }
+
+  async function handleSubmit(data) {
+    if (data.filter === '') {
+      loadAllEvents();
+    } else {
+      const response = await api.get(`/filter/events/${data.filter}`);
+      setEvents(formatDate(response.data));
+    }
+  }
+
+  async function filterByCategory(category) {
+    const filterCategories = document.getElementById('filterCategories');
+    filterCategories.value = category.name;
+
+    const response = await api.get(`/filter/categories/${category.id}`);
+    const data = response.data.map(event => event.Event);
+    setEvents(formatDate(data));
+
+    setVisible(false);
+  }
+
   return (
     <>
       <Header tittle="DASHBOARD" />
       <Container>
-        <h1>Eventos</h1>
-        <EventList>
-          {events.map(
-            event =>
-              !event.past && (
-                <Event key={event.id}>
-                  <EventHeader>
-                    <div>
-                      <Link to={`/users/${event.promoter.id}`}>
-                        <div className="promoterImage">
-                          <PromoterImage
-                            src={event.promoter.File.url}
-                            size={40}
-                          />
-                        </div>
-                      </Link>
-                      <Link to={`/users/${event.promoter.id}`}>
-                        <h4>{event.promoter.name}</h4>
-                      </Link>
-                    </div>
+        <Form onSubmit={handleSubmit}>
+          <h1>Eventos</h1>
+          <div className="filters">
+            <Filter>
+              <Input name="filter" placeholder="Pesquisar" />
+              <button type="submit">ok</button>
+            </Filter>
+            <button
+              type="button"
+              onClick={handleVisibility}
+              className="filterCategory"
+            >
+              <FilterByCategory
+                visible={visible}
+                list={
+                  <ul>
+                    <li>
+                      <button type="button" onClick={loadAllEvents}>
+                        Todas
+                      </button>
+                    </li>
+                    {categories.map(category => (
+                      <li>
+                        <button
+                          type="button"
+                          onClick={() => filterByCategory(category)}
+                        >
+                          {category.name}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                }
+              >
+                <input
+                  type="text"
+                  disabled
+                  id="filterCategories"
+                  placeholder="Categoria musical"
+                />
+              </FilterByCategory>
+            </button>
+          </div>
+        </Form>
 
-                    {event.favorited.length === 0 ? (
+        <EventList>
+          {events.length === 0 ? (
+            <p>HAHA</p>
+          ) : (
+            events.map(
+              event =>
+                !event.past && (
+                  <Event key={event.id}>
+                    <EventHeader>
+                      <div>
+                        <Link to={`/users/${event.promoter.id}`}>
+                          <div className="promoterImage">
+                            <PromoterImage
+                              src={event.promoter.File.url}
+                              size={40}
+                            />
+                          </div>
+                        </Link>
+                        <Link to={`/users/${event.promoter.id}`}>
+                          <h4>{event.promoter.name}</h4>
+                        </Link>
+                      </div>
+
+                      {/* {event.favorited.length === 0 ? (
                       <FavoriteButton
                         type="button"
                         onClick={() => {
@@ -103,36 +207,37 @@ export default function Dashboard() {
                       >
                         <IoIosHeart color={colors.primary} />
                       </FavoriteButton>
-                    )}
-                  </EventHeader>
-                  <Link to={`/events/${event.id}`}>
-                    <BannerImage src={event.banner.url} size={300} />
-                  </Link>
-                  <Description>
-                    <section>
-                      <div className="date">
-                        <h3>{event.mounth}</h3>
-                        <h2>{event.day}</h2>
-                      </div>
-                      <tr />
-                      <div className="description">
-                        <h2>{event.name}</h2>
-                        {/* <span>{event.description}</span> */}
-                        <Categories eventId={event.id} />
-                      </div>
-                    </section>
+                    )} */}
+                    </EventHeader>
+                    <Link to={`/events/${event.id}`}>
+                      <BannerImage src={event.banner.url} size={300} />
+                    </Link>
+                    <Description>
+                      <section>
+                        <div className="date">
+                          <h3>{event.mounth}</h3>
+                          <h2>{event.day}</h2>
+                        </div>
+                        <tr />
+                        <div className="description">
+                          <h2>{event.name}</h2>
+                          {/* <span>{event.description}</span> */}
+                          <Categories eventId={event.id} />
+                        </div>
+                      </section>
 
-                    <div className="buttons">
-                      <DefaultButton
-                        type="button"
-                        onClick={() => addProduct(event)}
-                      >
-                        Comprar
-                      </DefaultButton>
-                    </div>
-                  </Description>
-                </Event>
-              )
+                      <div className="buttons">
+                        <DefaultButton
+                          type="button"
+                          onClick={() => addProduct(event)}
+                        >
+                          Comprar
+                        </DefaultButton>
+                      </div>
+                    </Description>
+                  </Event>
+                )
+            )
           )}
         </EventList>
       </Container>

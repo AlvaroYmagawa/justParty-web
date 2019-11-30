@@ -6,7 +6,6 @@ import * as Yup from 'yup';
 import { Input, Form } from '@rocketseat/unform';
 import { DefaultButton } from '~/components/Buttons';
 import logo from '~/assets/logo.png';
-import { Checkbox } from '~/components/Inputs';
 import { signUpRequest } from '~/store/modules/auth/actions';
 
 const schema = Yup.object().shape({

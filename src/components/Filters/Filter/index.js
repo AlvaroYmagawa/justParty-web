@@ -7,7 +7,7 @@ import { Wrapper } from './styles';
 export default function Filter({ children }) {
   return (
     <Wrapper>
-      <MdSearch size={17} />
+      <MdSearch />
       {children}
     </Wrapper>
   );

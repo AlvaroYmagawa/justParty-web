@@ -5,9 +5,25 @@ export const Container = styled.div`
   width: 100%;
   padding: 40px 8%;
 
-  h1 {
-    text-transform: none;
-    color: #333;
+  form {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    h1 {
+      text-transform: none;
+      color: #333;
+    }
+
+    .filters {
+      display: flex;
+      justify-content: space-between;
+
+      .filterCategory {
+        margin-left: 8px;
+        border: none;
+        background: none;
+      }
+    }
   }
 `;
 

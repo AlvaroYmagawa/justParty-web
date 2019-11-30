@@ -28,7 +28,7 @@ export default function SignIn() {
       <Form schema={schema} onSubmit={handleSubmit}>
         <Input name="email" type="email" placeholder="Seu e-mail" />
         <Input name="password" type="password" placeholder="Sua senha" />
-
+        <div className="g-signin2" data-onsuccess="onSignIn" />
         <DefaultButton type="submit">
           {loading ? `carregando...` : `Acessar`}
         </DefaultButton>

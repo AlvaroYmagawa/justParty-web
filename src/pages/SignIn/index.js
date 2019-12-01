@@ -6,6 +6,7 @@ import { Input, Form } from '@rocketseat/unform';
 import { DefaultButton } from '~/components/Buttons';
 import { signInRequest } from '~/store/modules/auth/actions';
 import logo from '~/assets/logo.png';
+import GSignIn2 from '~/pages/GSignIn2';
 
 const schema = Yup.object().shape({
   email: Yup.string()
@@ -28,7 +29,7 @@ export default function SignIn() {
       <Form schema={schema} onSubmit={handleSubmit}>
         <Input name="email" type="email" placeholder="Seu e-mail" />
         <Input name="password" type="password" placeholder="Sua senha" />
-        <div className="g-signin2" data-onsuccess="onSignIn" />
+        <GSignIn2 />
         <DefaultButton type="submit">
           {loading ? `carregando...` : `Acessar`}
         </DefaultButton>

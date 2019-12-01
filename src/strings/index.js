@@ -1,5 +1,5 @@
 const strings = {
-  baseUrl: 'https://justparty-backend.herokuapp.com',
+  baseUrl: 'https://justparty-24109.appspot.com/',
 };
 
 export default strings;

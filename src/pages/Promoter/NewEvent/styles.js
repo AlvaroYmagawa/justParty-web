@@ -12,7 +12,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
 
-    button {
+    > button {
       margin: 16px 0 16px auto;
       text-transform: uppercase;
       width: 100%;
@@ -29,6 +29,35 @@ export const InputArea = styled.div`
   flex-direction: column;
   border: 1px solid ${colors.border};
   border-radius: 4px;
+
+  span {
+    margin-top: 8px;
+    font-size: 14px;
+    color: ${colors.span};
+  }
+
+  .categoriesHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    button {
+      display: flex;
+      background: none;
+      align-items: center;
+      font-weight: bold;
+      text-transform: none;
+      border: none;
+      color: ${colors.accent};
+
+      svg {
+        margin-left: 4px;
+        fill: ${colors.accent};
+        height: 20px;
+        width: 20px;
+      }
+    }
+  }
 
   .banner {
     margin-top: 64px;
@@ -71,7 +100,7 @@ export const InputArea = styled.div`
     align-items: flex-end;
     justify-content: space-between;
 
-    > div {
+    .dateArea {
       display: flex;
       width: 50%;
       align-items: center;
@@ -83,6 +112,14 @@ export const InputArea = styled.div`
 
       input {
         max-width: 300px;
+        background: none;
+        width: 80%;
+        border: none;
+        border-bottom: 1px solid ${colors.span};
+
+        &:focus {
+          border-bottom: 2px solid ${colors.accent};
+        }
       }
     }
 
@@ -92,7 +129,7 @@ export const InputArea = styled.div`
       }
     }
 
-    input,
+    > input,
     textarea {
       background: none;
       width: 80%;

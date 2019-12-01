@@ -170,26 +170,26 @@ export default function Dashboard() {
           {events.length === 0 ? (
             <p>HAHA</p>
           ) : (
-            events.map(
-              event =>
-                !event.past && (
-                  <Event key={event.id}>
-                    <EventHeader>
-                      <div>
-                        <Link to={`/users/${event.promoter.id}`}>
-                          <div className="promoterImage">
-                            <PromoterImage
-                              src={event.promoter.File.url}
-                              size={40}
-                            />
-                          </div>
-                        </Link>
-                        <Link to={`/users/${event.promoter.id}`}>
-                          <h4>{event.promoter.name}</h4>
-                        </Link>
-                      </div>
+              events.map(
+                event =>
+                  !event.past && (
+                    <Event key={event.id}>
+                      <EventHeader>
+                        <div>
+                          <Link to={`/users/${event.promoter.id}`}>
+                            <div className="promoterImage">
+                              <PromoterImage
+                                src={event.promoter.File.url}
+                                size={40}
+                              />
+                            </div>
+                          </Link>
+                          <Link to={`/users/${event.promoter.id}`}>
+                            <h4>{event.promoter.name}</h4>
+                          </Link>
+                        </div>
 
-                      {/* {event.favorited.length === 0 ? (
+                        {/* {event.favorited.length === 0 ? (
                       <FavoriteButton
                         type="button"
                         onClick={() => {
@@ -208,37 +208,37 @@ export default function Dashboard() {
                         <IoIosHeart color={colors.primary} />
                       </FavoriteButton>
                     )} */}
-                    </EventHeader>
-                    <Link to={`/events/${event.id}`}>
-                      <BannerImage src={event.banner.url} size={300} />
-                    </Link>
-                    <Description>
-                      <section>
-                        <div className="date">
-                          <h3>{event.mounth}</h3>
-                          <h2>{event.day}</h2>
-                        </div>
-                        <tr />
-                        <div className="description">
-                          <h2>{event.name}</h2>
-                          {/* <span>{event.description}</span> */}
-                          <Categories eventId={event.id} />
-                        </div>
-                      </section>
+                      </EventHeader>
+                      <Link to={`/events/${event.id}`}>
+                        <BannerImage src={event.banner.url} size={300} />
+                      </Link>
+                      <Description>
+                        <section>
+                          <div className="date">
+                            <h3>{event.mounth}</h3>
+                            <h2>{event.day}</h2>
+                          </div>
+                          <tr />
+                          <div className="description">
+                            <h2>{event.name}</h2>
+                            {/* <span>{event.description}</span> */}
+                            <Categories eventId={event.id} />
+                          </div>
+                        </section>
 
-                      <div className="buttons">
-                        <DefaultButton
-                          type="button"
-                          onClick={() => addProduct(event)}
-                        >
-                          Comprar
+                        <div className="buttons">
+                          <DefaultButton
+                            type="button"
+                            onClick={() => addProduct(event)}
+                          >
+                            Comprar
                         </DefaultButton>
-                      </div>
-                    </Description>
-                  </Event>
-                )
-            )
-          )}
+                        </div>
+                      </Description>
+                    </Event>
+                  )
+              )
+            )}
         </EventList>
       </Container>
     </>

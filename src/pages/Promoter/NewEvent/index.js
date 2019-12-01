@@ -1,28 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
 import InputMask from 'react-input-mask';
 
 import { Form, Input } from '@rocketseat/unform';
+import { toast } from 'react-toastify';
+import { MdAdd } from 'react-icons/md';
+import history from '~/services/history';
 import Header from '~/components/Promoter/Header';
 import api from '~/services/api';
 import { DefaultButton } from '~/components/Buttons';
 import Banner from '~/components/ImageInput';
 import { Container, InputArea } from './styles';
+import { Categories } from '~/components/Filters';
 
 export default function NewEvent() {
+  const [categories, setCategories] = useState([1]);
+  const [index, setIndex] = useState(2);
+  async function registerCategories(eventId, categoryId) {
+    await api.post('categories', {
+      event_id: eventId,
+      default_category_id: categoryId,
+    });
+  }
+
   async function handleSubmit(data) {
     const dateHours = document.getElementById('dateHours');
     const salesDateHours = document.getElementById('salesDateHours');
 
-    console.tron.log(data.banner);
-
-    await api.post('/events', {
+    const response = await api.post('/events', {
       name: data.name,
       localization: data.localization,
       description: data.description,
       date: `${data.date}T${dateHours.value}-3:00`,
       sales_date: `${data.salesDate}T${salesDateHours.value}-3:00`,
-      banner_id: 4,
+      banner_id: data.imageInput,
     });
+
+    for (let i = 0; i < categories.length; i += 1) {
+      switch (i) {
+        case 0:
+          registerCategories(response.data.id, data.category1);
+          break;
+        case 1:
+          registerCategories(response.data.id, data.category2);
+          break;
+        case 2:
+          registerCategories(response.data.id, data.category3);
+          break;
+        case 3:
+          registerCategories(response.data.id, data.category4);
+          break;
+        default:
+      }
+    }
+
+    toast.success('Evento Publicado com sucesso!');
+    history.push('/developers/events');
   }
 
   return (
@@ -63,14 +95,14 @@ export default function NewEvent() {
             <h3>Datas e horários</h3>
 
             <div className="content">
-              <div>
+              <div className="dateArea">
                 <p>
                   Data da festa <span>*</span>
                 </p>
                 <Input type="date" name="date" />
               </div>
 
-              <div>
+              <div className="dateArea">
                 <p>
                   Horário <span>*</span>
                 </p>
@@ -79,20 +111,47 @@ export default function NewEvent() {
             </div>
 
             <div className="content">
-              <div>
+              <div className="dateArea">
                 <p>
                   Data das vendas <span>*</span>
                 </p>
-                <Input type="date" name="salesData" />
+                <Input type="date" name="salesDate" />
               </div>
 
-              <div>
+              <div className="dateArea">
                 <p>
                   Horário <span>*</span>
                 </p>
                 <InputMask mask="99:99" className="hours" id="salesDateHours" />
               </div>
             </div>
+          </InputArea>
+
+          <InputArea>
+            <div className="categoriesHeader">
+              <h3>Categoria Musical</h3>
+              <button
+                type="button"
+                onClick={() => {
+                  if (index === 5) {
+                    toast.error('O número máximo de categorias é 4');
+                    return;
+                  }
+                  setIndex(index + 1);
+                  setCategories([...categories, index]);
+                }}
+              >
+                Nova categoria
+                <MdAdd />
+              </button>
+            </div>
+            <span>É obrigatório pelo menos uma categoria</span>
+            {categories.map(category => (
+              <div className="content">
+                <p>{`Categoria ${category}`}</p>
+                <Categories name={`category${category}`} />
+              </div>
+            ))}
           </InputArea>
 
           <InputArea>
@@ -112,7 +171,7 @@ export default function NewEvent() {
             </div>
           </InputArea>
 
-          <DefaultButton type="submit">Crair Evento</DefaultButton>
+          <DefaultButton type="submit">Publicar Evento</DefaultButton>
         </Form>
       </Container>
     </>

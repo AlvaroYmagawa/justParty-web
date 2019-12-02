@@ -34,6 +34,7 @@ export default function Dashboard() {
   const [events, setEvents] = useState([]);
   const [categories, setCategories] = useState([]);
   const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   function handleVisibility() {
     setVisible(!visible);
@@ -82,6 +83,7 @@ export default function Dashboard() {
       const response = await api.get('/defaultCategories');
 
       setCategories(response.data);
+      setLoading(false);
     }
 
     loadCategories();
@@ -118,58 +120,59 @@ export default function Dashboard() {
   }
 
   return (
-    <>
-      <Header tittle="DASHBOARD" />
-      <Container>
-        <Form onSubmit={handleSubmit}>
-          <h1>Eventos</h1>
-          <div className="filters">
-            <Filter>
-              <Input name="filter" placeholder="Pesquisar" />
-              <button type="submit">ok</button>
-            </Filter>
-            <button
-              type="button"
-              onClick={handleVisibility}
-              className="filterCategory"
-            >
-              <FilterByCategory
-                visible={visible}
-                list={
-                  <ul>
-                    <li>
-                      <button type="button" onClick={loadAllEvents}>
-                        Todas
-                      </button>
-                    </li>
-                    {categories.map(category => (
+    !loading && (
+      <>
+        <Header tittle="DASHBOARD" />
+        <Container>
+          <Form onSubmit={handleSubmit}>
+            <h1>Eventos</h1>
+            <div className="filters">
+              <Filter>
+                <Input name="filter" placeholder="Pesquisar" />
+                <button type="submit">ok</button>
+              </Filter>
+              <button
+                type="button"
+                onClick={handleVisibility}
+                className="filterCategory"
+              >
+                <FilterByCategory
+                  visible={visible}
+                  list={
+                    <ul>
                       <li>
-                        <button
-                          type="button"
-                          onClick={() => filterByCategory(category)}
-                        >
-                          {category.name}
+                        <button type="button" onClick={loadAllEvents}>
+                          Todas
                         </button>
                       </li>
-                    ))}
-                  </ul>
-                }
-              >
-                <input
-                  type="text"
-                  disabled
-                  id="filterCategories"
-                  placeholder="Categoria musical"
-                />
-              </FilterByCategory>
-            </button>
-          </div>
-        </Form>
+                      {categories.map(category => (
+                        <li>
+                          <button
+                            type="button"
+                            onClick={() => filterByCategory(category)}
+                          >
+                            {category.name}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  }
+                >
+                  <input
+                    type="text"
+                    disabled
+                    id="filterCategories"
+                    placeholder="Categoria musical"
+                  />
+                </FilterByCategory>
+              </button>
+            </div>
+          </Form>
 
-        <EventList>
-          {events.length === 0 ? (
-            <p>HAHA</p>
-          ) : (
+          <EventList>
+            {events.length === 0 ? (
+              <p>HAHA</p>
+            ) : (
               events.map(
                 event =>
                   !event.past && (
@@ -232,15 +235,16 @@ export default function Dashboard() {
                             onClick={() => addProduct(event)}
                           >
                             Comprar
-                        </DefaultButton>
+                          </DefaultButton>
                         </div>
                       </Description>
                     </Event>
                   )
               )
             )}
-        </EventList>
-      </Container>
-    </>
+          </EventList>
+        </Container>
+      </>
+    )
   );
 }

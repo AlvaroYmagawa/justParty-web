@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import Calendar from './Calendar';
 import { Container, Content } from './styles';
 import { Avatar } from '~/components/Avatar';
 import ManageAccount from './ManageAccount';

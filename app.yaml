@@ -13,4 +13,7 @@
 # [START app_yaml]
 env: flex
 runtime: nodejs
+service: default
+env_variables:
+  REACT_APP_API_URL: 'https://justparty-24109.appspot.com/'
 # [END app_yaml]

@@ -37,8 +37,7 @@
     "customize-cra": "^0.8.0",
     "prettier": "^1.18.2",
     "babel-plugin-root-import": "^5.1.0",
-    "@babel/core": "7.0.0",
-    "webpack": ">=2"
+    "@babel/core": "7.0.0"
   },
   "scripts": {
     "start": "react-app-rewired start",

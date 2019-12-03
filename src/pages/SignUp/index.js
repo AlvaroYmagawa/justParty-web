@@ -21,22 +21,20 @@ export default function SignUp() {
   const [isPromoter, setIsPromoter] = useState(false);
   const dispatch = useDispatch();
 
-  function handleSubmit({
-    name,
-    email,
-    password,
-    confirmPassword,
-    description,
-    adress,
-  }) {
+  function handleSubmit({ name, email, password, confirmPassword }) {
+    const adress = document.getElementById('adress');
+    const contact = document.getElementById('contact');
+    const description = document.getElementById('description');
+
     dispatch(
       signUpRequest(
         name,
         email,
         password,
         confirmPassword,
-        description,
-        adress,
+        description.value,
+        adress.value,
+        contact.value,
         isPromoter
       )
     );
@@ -65,11 +63,26 @@ export default function SignUp() {
 
         {isPromoter && (
           <>
-            <Input name="description" type="text" placeholder="Descrição" />
+            <Input
+              name="description"
+              id="description"
+              type="text"
+              placeholder="Descrição"
+            />
 
-            <Input name="adress" type="text" placeholder="Endereço" />
+            <Input
+              name="adress"
+              id="adress"
+              type="text"
+              placeholder="Endereço"
+            />
 
-            <Input name="contact" type="text" placeholder="Telefone" />
+            <Input
+              name="contact"
+              id="contact"
+              type="text"
+              placeholder="Telefone"
+            />
           </>
         )}
 

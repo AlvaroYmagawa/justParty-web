@@ -15,11 +15,13 @@ import {
   Product,
   BuyButton,
 } from './styles';
+import { ComfirmModal } from '~/components/Modals';
 
 export default function Cart() {
   const dispatch = useDispatch();
   const products = useSelector(state => state.cart.products);
   const [visible, setVisible] = useState(false);
+  const [modal, setModal] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
@@ -105,7 +107,21 @@ export default function Cart() {
           ))}
         </Scroll>
         <h3>{totalPrice}</h3>
-        <BuyButton>Comprar</BuyButton>
+        <BuyButton
+          type="button"
+          onClick={() => {
+            setModal(!modal);
+          }}
+        >
+          Comprar
+        </BuyButton>
+        <ComfirmModal
+          tittle={`Deseja confirmar a compra de ${totalPrice}?`}
+          visible={modal}
+          func={() => {
+            setModal(!modal);
+          }}
+        />
       </Products>
     </Container>
   );

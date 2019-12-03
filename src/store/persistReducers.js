@@ -6,7 +6,7 @@ export default reducers => {
     {
       key: 'justParty',
       storage,
-      whiteList: ['auth', 'user', 'wishlist'], // Only persists the reducers inside the whiteList
+      whiteList: ['auth', 'user', 'wishlist', 'cart'], // Only persists the reducers inside the whiteList
     },
     reducers
   );

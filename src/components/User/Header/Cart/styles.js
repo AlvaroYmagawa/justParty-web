@@ -115,3 +115,7 @@ export const Product = styled.li`
     }
   }
 `;
+
+export const Total = styled.h3`
+  margin-top: 20px;
+`;

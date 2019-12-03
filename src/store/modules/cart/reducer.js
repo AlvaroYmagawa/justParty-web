@@ -16,6 +16,13 @@ export default function auth(state = INITIAL_STATE, action) {
         break;
       }
 
+      case '@auth/SIGN_OUT': {
+        for (let i = 0; i < draft.products.length + 1; i += 1) {
+          draft.products.pop();
+        }
+        break;
+      }
+
       case '@auth/UPDATE_CART': {
         const product = draft.products.find(
           p => p.id === action.payload.product.id

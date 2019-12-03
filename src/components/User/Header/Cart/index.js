@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { format, parseISO } from 'date-fns';
-import pt from 'date-fns/locale/pt';
 import { FiShoppingBag, MdAdd, MdRemove } from 'react-icons/all';
 import { formatPrice } from '~/util/format';
 import { updateCart } from '~/store/modules/cart/actions';
@@ -14,6 +12,7 @@ import {
   Scroll,
   Product,
   BuyButton,
+  Total,
 } from './styles';
 import { ComfirmModal } from '~/components/Modals';
 
@@ -26,12 +25,13 @@ export default function Cart() {
 
   useEffect(() => {
     function loadTotalPrice() {
-      const newPrices = products.map(
-        product => product.counter * product.price
-      );
-      const newTotal = newPrices.reduce((total, prices) => total + prices);
-
-      setTotalPrice(formatPrice(newTotal));
+      if (products.length > 0) {
+        const newPrices = products.map(
+          product => product.counter * product.price
+        );
+        const newTotal = newPrices.reduce((total, prices) => total + prices);
+        setTotalPrice(formatPrice(newTotal));
+      }
     }
 
     loadTotalPrice();
@@ -106,7 +106,7 @@ export default function Cart() {
             </Product>
           ))}
         </Scroll>
-        <h3>{totalPrice}</h3>
+        <Total>{totalPrice === 0 ? '' : `Total: ${totalPrice}`}</Total>
         <BuyButton
           type="button"
           onClick={() => {

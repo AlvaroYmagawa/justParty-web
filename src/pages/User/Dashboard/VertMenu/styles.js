@@ -74,44 +74,21 @@ export const Product = styled.li`
     justify-content: space-between;
     height: 70px;
     width: 100%;
-
-    .productInfoHeader {
-      font-size: 16px;
-      > span {
-        font-size: 12px;
-        color: ${colors.span};
-      }
-    }
   }
 
   .productCounter {
     display: flex;
     align-items: center;
-    flex-direction: column;
     justify-content: center;
 
-    h4 {
-      color: ${colors.primary};
-      font-size: 13px;
+    span {
+      color: ${colors.text};
+      margin: 0 8px;
+      font-weight: bold;
     }
 
-    .productCounterButtons {
-      margin-top: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      span {
-        cursor: pointer;
-        color: ${colors.text};
-        margin: 0 16px;
-        font-weight: bold;
-      }
-
-      button {
-        border: 0;
-        background: none;
-      }
+    svg {
+      fill: ${colors.accent};
     }
   }
 `;

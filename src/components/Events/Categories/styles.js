@@ -19,6 +19,8 @@ export const CategoryList = styled.ul`
 
 export const Category = styled.li`
   color: ${props => props.color};
+  font-size: 13px;
+  text-transform: uppercase;
   font-weight: bold;
   margin-right: 8px;
 `;

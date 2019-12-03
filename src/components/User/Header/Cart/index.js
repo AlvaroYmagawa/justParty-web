@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { format, parseISO } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 import { FiShoppingBag, MdAdd, MdRemove } from 'react-icons/all';
+import { formatPrice } from '~/util/format';
+import { updateCart } from '~/store/modules/cart/actions';
 import RoundImage from '~/components/Avatar';
+import colors from '~/styles/colors';
 import {
   Container,
   Badge,
@@ -12,11 +17,36 @@ import {
 } from './styles';
 
 export default function Cart() {
+  const dispatch = useDispatch();
   const products = useSelector(state => state.cart.products);
   const [visible, setVisible] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    function loadTotalPrice() {
+      const newPrices = products.map(
+        product => product.counter * product.price
+      );
+      const newTotal = newPrices.reduce((total, prices) => total + prices);
+
+      setTotalPrice(formatPrice(newTotal));
+    }
+
+    loadTotalPrice();
+  }, [products]);
 
   function handleVisibility() {
     setVisible(!visible);
+  }
+
+  function handleTotalPrice(product) {
+    const newPrice = product.price * product.counter;
+    setTotalPrice(newPrice);
+  }
+
+  function handleUpdateCart(product, index, operation) {
+    dispatch(updateCart(product, index, operation));
+    handleTotalPrice(product);
   }
 
   return (
@@ -28,7 +58,7 @@ export default function Cart() {
       <Products visible={visible}>
         <h3>Meu Carrinho</h3>
         <Scroll>
-          {products.map(product => (
+          {products.map((product, index) => (
             <Product key={product.id} unread={!product.read}>
               <RoundImage
                 src={product.banner.url}
@@ -36,17 +66,45 @@ export default function Cart() {
                 className="eventBanner"
               />
               <div className="productInfo">
-                <h4>{product.name}</h4>
+                <div className="productInfoHeader">
+                  <h4>{product.name}</h4>
+                  {/* <span>
+                    {format(parseISO(product.date), 'dd/MMMM/yy', {
+                      locale: pt,
+                    })}
+                  </span> */}
+                </div>
 
                 <div className="productCounter">
-                  <MdRemove />
-                  <span>1</span>
-                  <MdAdd />
+                  <h4>{formatPrice(product.price * product.counter)}</h4>
+
+                  <div className="productCounterButtons">
+                    <button
+                      type="button"
+                      disabled={product.counter === 1}
+                      onClick={() => handleUpdateCart(product, index, 0)}
+                    >
+                      <MdRemove
+                        color={
+                          product.counter === 1 ? colors.span : colors.accent
+                        }
+                      />
+                    </button>
+
+                    <span>{product.counter}</span>
+                    <button
+                      type="button"
+                      onClick={() => handleUpdateCart(product, index, 1)}
+                    >
+                      <MdAdd color={colors.accent} />
+                    </button>
+                  </div>
                 </div>
               </div>
             </Product>
           ))}
         </Scroll>
+        <h3>{totalPrice}</h3>
         <BuyButton>Comprar</BuyButton>
       </Products>
     </Container>

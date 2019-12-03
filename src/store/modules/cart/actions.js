@@ -4,3 +4,10 @@ export function addToCart(product) {
     payload: { product },
   };
 }
+
+export function updateCart(product, index, operation) {
+  return {
+    type: '@auth/UPDATE_CART',
+    payload: { product, index, operation },
+  };
+}

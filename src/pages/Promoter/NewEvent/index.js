@@ -33,6 +33,7 @@ export default function NewEvent() {
       date: `${data.date}T${dateHours.value}-3:00`,
       sales_date: `${data.salesDate}T${salesDateHours.value}-3:00`,
       banner_id: data.imageInput,
+      price: data.price,
     });
 
     for (let i = 0; i < categories.length; i += 1) {
@@ -168,6 +169,16 @@ export default function NewEvent() {
               </div>
 
               <Banner alt="Banner do seu evento" name="banner" />
+            </div>
+          </InputArea>
+
+          <InputArea>
+            <h3>Precificação</h3>
+            <div className="content">
+              <p>
+                Preço do ingresso <span>*</span>
+              </p>
+              <Input type="number" min="1" name="price" />
             </div>
           </InputArea>
 

@@ -8,7 +8,31 @@ export default function auth(state = INITIAL_STATE, action) {
   return produce(state, draft => {
     switch (action.type) {
       case '@auth/ADD_TO_CART': {
-        draft.products.push(action.payload.product);
+        const newProduct = {
+          ...action.payload.product,
+          counter: 1,
+        };
+        draft.products.push(newProduct);
+        break;
+      }
+
+      case '@auth/UPDATE_CART': {
+        const product = draft.products.find(
+          p => p.id === action.payload.product.id
+        );
+
+        draft.products.splice(action.payload.index, 1);
+
+        const updatedProduct = {
+          ...action.payload.product,
+
+          counter:
+            action.payload.operation > 0
+              ? product.counter + 1
+              : product.counter - 1,
+        };
+
+        draft.products = [...draft.products, updatedProduct];
         break;
       }
 

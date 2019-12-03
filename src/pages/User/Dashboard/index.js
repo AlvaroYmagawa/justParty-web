@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { format, parseISO } from 'date-fns';
+import { format, parseISO, formatDistance } from 'date-fns';
+
 import pt from 'date-fns/locale/pt';
 import { IoIosHeartEmpty, IoIosHeart, IoMdMusicalNote } from 'react-icons/all';
 import { Input, Form } from '@rocketseat/unform';
+import { formatPrice } from '~/util/format';
 import { addToCart } from '~/store/modules/cart/actions';
 import { DefaultButton } from '~/components/Buttons';
 import api from '~/services/api';
@@ -18,6 +20,7 @@ import PromoterImage from '~/components/Avatar';
 import { Categories } from '~/components/Events';
 import BannerImage from '~/components/Banner';
 import { Filter, FilterByCategory } from '~/components/Filters';
+import VertMenu from './VertMenu';
 import colors from '~/styles/colors';
 
 import {
@@ -26,6 +29,7 @@ import {
   Event,
   Description,
   EventHeader,
+  SellingArea,
   FavoriteButton,
 } from './styles';
 
@@ -52,6 +56,7 @@ export default function Dashboard() {
       hours: format(parseISO(event.date), 'HH:mm', {
         locale: pt,
       }),
+      priceFormatted: formatPrice(event.price),
     }));
 
     return data;
@@ -74,6 +79,7 @@ export default function Dashboard() {
         hours: format(parseISO(event.date), 'HH:mm', {
           locale: pt,
         }),
+        priceFormatted: formatPrice(event.price),
       }));
 
       setEvents(data);
@@ -171,7 +177,7 @@ export default function Dashboard() {
 
           <EventList>
             {events.length === 0 ? (
-              <p>HAHA</p>
+              <p />
             ) : (
               events.map(
                 event =>
@@ -211,6 +217,8 @@ export default function Dashboard() {
                         <IoIosHeart color={colors.primary} />
                       </FavoriteButton>
                     )} */}
+
+                        {/* <VertMenu /> */}
                       </EventHeader>
                       <Link to={`/events/${event.id}`}>
                         <BannerImage src={event.banner.url} size={300} />
@@ -223,20 +231,38 @@ export default function Dashboard() {
                           </div>
                           <tr />
                           <div className="description">
-                            <h2>{event.name}</h2>
-                            {/* <span>{event.description}</span> */}
+                            <div>
+                              <h2>{event.name}</h2>
+                              <span>{event.description}</span>
+                            </div>
+
                             <Categories eventId={event.id} />
                           </div>
                         </section>
 
-                        <div className="buttons">
+                        <SellingArea selling={event.selling}>
+                          <h3>{event.priceFormatted}</h3>
                           <DefaultButton
                             type="button"
                             onClick={() => addProduct(event)}
                           >
                             Comprar
                           </DefaultButton>
-                        </div>
+
+                          <p className="salesDate">
+                            Vendas
+                            <strong>
+                              {formatDistance(
+                                parseISO(event.sales_date),
+                                new Date(),
+                                {
+                                  addSuffix: true,
+                                  locale: pt,
+                                }
+                              )}
+                            </strong>
+                          </p>
+                        </SellingArea>
                       </Description>
                     </Event>
                   )

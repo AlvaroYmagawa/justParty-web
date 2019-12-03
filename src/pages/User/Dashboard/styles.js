@@ -3,7 +3,7 @@ import colors from '~/styles/colors';
 
 export const Container = styled.div`
   width: 100%;
-  padding: 40px 8%;
+  padding: 16px 8%;
 
   form {
     display: flex;
@@ -30,7 +30,7 @@ export const Container = styled.div`
 export const EventList = styled.ul`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 3%;
+  grid-column-gap: 2%;
   list-style: none;
   width: 100%;
   margin: 0 auto;
@@ -89,14 +89,48 @@ export const FavoriteButton = styled.button`
   }
 `;
 
+export const SellingArea = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: ${props => (props.selling ? 'center' : 'flex-end')};
+
+  button {
+    display: ${props => (props.selling ? 'flex' : 'none')};
+    padding: 8px 32px;
+  }
+
+  h3 {
+    /* display: ${props => (props.selling ? 'none' : 'flex')}; */
+    font-size: 18px;
+    color: ${colors.text};
+  }
+
+  .salesDate {
+    display: ${props => (props.selling ? 'none' : 'flex')};
+    font-size: 13px;
+
+    color: ${colors.span};
+
+    strong {
+      font-weight: normal;
+      margin-left: 4px;
+    }
+  }
+`;
+
 export const Description = styled.div`
   padding: 16px;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  height: 95px;
 
   section {
+    height: 100%;
     display: flex;
+    align-items: center;
     justify-content: space-between;
 
     a {
@@ -104,24 +138,10 @@ export const Description = styled.div`
     }
   }
 
-  .buttons {
-    display: flex;
-    align-items: center;
-
-    .favoriteButton {
-      border: none;
-      background: none;
-      svg {
-        cursor: pointer;
-        height: 25px;
-        width: 25px;
-        fill: ${colors.text};
-        margin-right: 16px;
-      }
-    }
-  }
-
   .date {
+    padding-top: 3px;
+    align-self: center;
+    height: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -144,6 +164,7 @@ export const Description = styled.div`
   }
 
   .description {
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

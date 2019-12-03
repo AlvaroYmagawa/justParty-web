@@ -41,6 +41,7 @@ export function* signUp({ payload }) {
       description,
       adress,
       promoter,
+      contact,
     } = payload;
 
     yield call(api.post, 'users', {
@@ -51,6 +52,7 @@ export function* signUp({ payload }) {
       description,
       adress,
       promoter,
+      contact,
     });
 
     toast.success(`Parabéns ${name}, agora você pode curtir o role!`);

@@ -19,6 +19,7 @@ export function signUpRequest(
   confirmPassword,
   description,
   adress,
+  contact,
   promoter
 ) {
   return {
@@ -30,6 +31,7 @@ export function signUpRequest(
       confirmPassword,
       description,
       adress,
+      contact,
       promoter,
     },
   };

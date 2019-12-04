@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
-
 import { Input, Form } from '@rocketseat/unform';
 import { DefaultButton } from '~/components/Buttons';
 import logo from '~/assets/logo.png';
@@ -26,7 +25,7 @@ export default function SignUp() {
     email,
     password,
     confirmPassword,
-    description,
+    description, // teste
     adress,
   }) {
     dispatch(
